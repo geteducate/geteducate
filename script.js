@@ -1,92 +1,62 @@
-/* Modal Functions */
-function openModal(type) {
-  document.getElementById('modalBg').style.display = 'flex';
-  document.getElementById('registerModal').classList.add('hidden');
-  document.getElementById('loginModal').classList.add('hidden');
-  document.getElementById('adminLoginModal').classList.add('hidden');
-  if (type === 'login') document.getElementById('loginModal').classList.remove('hidden');
-  else if (type === 'register') document.getElementById('registerModal').classList.remove('hidden');
-  else if (type === 'adminLogin') document.getElementById('adminLoginModal').classList.remove('hidden');
+// Real quotes from sources (Ogilvy books, podcasts, etc.)
+const quotes = [
+  "“The most important word in the vocabulary of advertising is TEST.” — David Ogilvy",
+  "“If it doesn’t sell, it isn’t creative.” — David Ogilvy",
+  "“The consumer isn’t a moron. She is your wife.” — David Ogilvy",
+  "“Nobody reads advertising. People read what interests them.” — Howard Gossage",
+  "“On average, 5 times as many people read the headline as read the body copy.” — David Ogilvy",
+  "“Good advertising is written from the consumer’s point of view.” — Claude Hopkins"
+];
+let qIndex = 0;
+function rotateQuote() {
+  document.getElementById('quote').classList.remove('active');
+  setTimeout(() => {
+    document.getElementById('quote').innerText = quotes[qIndex];
+    document.getElementById('quote').classList.add('active');
+    qIndex = (qIndex + 1) % quotes.length;
+  }, 1000);
+}
+setInterval(rotateQuote, 10000);
+rotateQuote();
+
+// Login check
+function checkLogin(redirect) {
+  if (!localStorage.getItem('currentUser')) { openModal('login'); return false; }
+  location.href = redirect;
+  return true;
 }
 
-function closeModal() {
-  document.getElementById('modalBg').style.display = 'none';
-}
-
-function toggleModal(type) {
-  if (type === 'login') {
-    document.getElementById('loginModal').classList.remove('hidden');
-    document.getElementById('registerModal').classList.add('hidden');
-  } else {
-    document.getElementById('registerModal').classList.remove('hidden');
-    document.getElementById('loginModal').classList.add('hidden');
-  }
-}
-
-/* User Authentication */
+// Register with code
+let verifyCode = '';
 function register() {
   const email = document.getElementById('regEmail').value;
   const pass = document.getElementById('regPass').value;
-  if (!email || !pass) { alert('Fill all fields'); return; }
-  let users = JSON.parse(localStorage.getItem('users') || '[]');
-  users.push({ email: email, password: pass });
-  localStorage.setItem('users', JSON.stringify(users));
-  alert('Registered! Check your email for 4-digit code (simulated).');
-  toggleModal('login');
+  if (!email || !pass) return alert('Fill fields');
+  verifyCode = Math.floor(1000 + Math.random() * 9000);
+  alert(`Code sent to ${email}: ${verifyCode} (demo)`);
+  document.getElementById('verifyStep').classList.remove('hidden');
+}
+function verify() {
+  if (document.getElementById('codeInput').value == verifyCode) {
+    let users = JSON.parse(localStorage.getItem('users') || '[]');
+    users.push({email: document.getElementById('regEmail').value, pass: document.getElementById('regPass').value});
+    localStorage.setItem('users', JSON.stringify(users));
+    alert('Registered!'); closeModal(); 
+  } else alert('Wrong code');
 }
 
-function login() {
-  const email = document.getElementById('logEmail').value;
-  const pass = document.getElementById('logPass').value;
-  let users = JSON.parse(localStorage.getItem('users') || '[]');
-  let found = users.find(u => u.email === email && u.password === pass);
-  if (found) { alert('Access granted!'); closeModal(); } else alert('Wrong credentials!');
+// Application multi-step
+let step = 0; let data = {};
+const steps = document.querySelectorAll('.step');
+function showStep() { steps.forEach(s => s.classList.remove('active')); steps[step].classList.add('active'); }
+function next() {
+  // Save data + validation logic here (e.g., required fields)
+  if (step === 5) data.name = document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value;
+  // Dynamic name/age insert
+  if (step > 5) document.querySelector('.dynamic-name').innerText = data.name || '';
+  // Branching example for experience question
+  if (step === 10 && document.querySelector('input[name="fullstackExp"]:checked').value === 'no') { step += 2; } // skip to other exp
+  step++; showStep();
 }
-
-function loginAdmin() {
-  const user = document.getElementById('adminUser').value;
-  const pass = document.getElementById('adminPass').value;
-  if (user === 'geteducateio8' && pass === '@Shuhrat2008') {
-    closeModal();
-    document.getElementById('adminPanel').style.display = 'flex';
-    updateStats();
-  } else { alert('Wrong admin credentials!'); }
-}
-
-function updateStats() {
-  let users = JSON.parse(localStorage.getItem('users') || '[]');
-  document.getElementById('totalUsers').innerText = users.length;
-  document.getElementById('newUsers').innerText = Math.floor(Math.random() * 5 + 1);
-  document.getElementById('adsOffers').innerText = Math.floor(Math.random() * 3);
-}
-
-/* Quotes Rotation */
-const quotes = [
-  "“The way to get started is to quit talking and begin doing.” — Walt Disney",
-  "“Marketing is really just about sharing your passion.” — Michael Hyatt",
-  "“Copywriting is salesmanship in print.” — Robert Bly",
-  "“Make every detail perfect and limit the number of details to perfect.” — Jack Dorsey",
-  "“Don’t find customers for your products, find products for your customers.” — Seth Godin",
-  "“Good copy can sell anything.” — David Ogilvy"
-];
-let qIndex = 0;
-setInterval(() => {
-  qIndex = (qIndex + 1) % quotes.length;
-  document.getElementById('rotatingQuote').innerText = quotes[qIndex];
-}, 10000);
-
-/* Multi-step Application Form */
-let currentStep = 0;
-function showStep(index) {
-  let steps = document.querySelectorAll('.step');
-  steps.forEach(s => s.classList.remove('active'));
-  if (steps[index]) steps[index].classList.add('active');
-}
-function nextStep() {
-  currentStep++;
-  showStep(currentStep);
-}
-function backStep() {
-  currentStep--;
-  showStep(currentStep);
-}
+function back() { step--; showStep(); }
+function submitApp() { alert('Submitted!'); location.href = 'success.html'; } // new success page
