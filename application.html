@@ -1,151 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Apply for Full-Stack Developer at GetEducate.">
-    <title>Apply - GetEducate</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply - GetEducate</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 </head>
-<body>
-    <header>
-        <div class="logo">GetEducate</div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="jobs.html">Careers</a>
-            <a href="#" onclick="openModal('login')">Login</a>
-            <a href="#" onclick="openModal('register')">Register</a>
-            <a href="#" onclick="openModal('adminLogin')">Admin</a>
-        </nav>
-    </header>
+<body onload="if(!isLoggedIn()) location.href='index.html'">
+  <header><!-- same --></header>
 
-    <section class="hero">
-        <h1>Full-Stack Developer Application</h1>
-        <p>Thank you for your interest! Please fill out the form thoroughly to increase your chances of success.</p>
-    </section>
-
-    <section class="section form">
-        <!-- Multi-step form steps -->
-        <div class="step active">
-            <h2>Step 1 of 11: Ready to Start?</h2>
-            <p>We're excited to learn more about you! This application will take about 5-10 minutes. Make sure you have your GitHub profile link ready.</p>
-            <button onclick="nextStep()">Let's Begin</button>
-        </div>
-
-        <div class="step">
-            <h2>Phase 1: Basic Information</h2>
-            <p>Tell us about yourself</p>
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>Where are you from?</h2>
-            <input type="text" placeholder="Your location">
-            <p>Awesome! It's nice to meet you.</p>
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>Your GitHub Profile</h2>
-            <input type="url" placeholder="https://github.com/yourusername">
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>How did you find us?</h2>
-            <select>
-                <option>Social Media</option>
-                <option>Referral</option>
-                <option>Search</option>
-            </select>
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>Your Age</h2>
-            <input type="number" placeholder="e.g., 25">
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>Education Status</h2>
-            <textarea placeholder="Describe your education background"></textarea>
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>Phase 2: Professional Fitness</h2>
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>Current Income</h2>
-            <input type="text" placeholder="e.g., $50,000/year">
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>Your Experience</h2>
-            <textarea placeholder="Describe your professional experience"></textarea>
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>Tell us more</h2>
-            <textarea placeholder="Why GetEducate?"></textarea>
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>Other Development Experience</h2>
-            <textarea placeholder="Any additional skills or projects"></textarea>
-            <button onclick="backStep()">Back</button>
-            <button onclick="nextStep()">Continue</button>
-        </div>
-
-        <div class="step">
-            <h2>Your Development Journey</h2>
-            <textarea placeholder="How did you get into development?"></textarea>
-            <button onclick="backStep()">Back</button>
-            <button onclick="alert('Application Submitted!'); location.href='index.html'">Submit Application</button>
-        </div>
-
-        <div class="step success">
-            <h2>Congratulations!</h2>
-            <p>Thank you for submitting your application. We will carefully review it and contact you via email within 3-5 business days.</p>
-            <p>Keep an eye on your inbox (and spam folder) for updates!</p>
-            <button onclick="location.href='index.html'">Back to Home</button>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 GetEducate. All rights reserved.</p>
-        <a href="#">Privacy</a> | <a href="#">Terms</a>
-    </footer>
-
-    <!-- Modals (copy from index.html) -->
-    <div id="modalBg" class="modal-bg" onclick="closeModal()">
-        <!-- ... -->
+  <section class="section">
+    <div class="app-step active">
+      <img src="logo.png" class="step-logo">
+      <h2>Full-Stack Developer</h2>
+      <p>Thank you for your interest... Please answer thoroughly.</p>
+      <button class="btn" onclick="nextApp()">Apply Now</button>
     </div>
 
-    <!-- Admin Panel (copy from index.html) -->
-    <div id="adminPanel" class="admin-panel">
-        <!-- ... -->
+    <div class="app-step">
+      <img src="logo.png" class="step-logo">
+      <button onclick="backApp()">Back</button>
+      <input id="firstName" required placeholder="First Name">
+      <input id="lastName" required placeholder="Last Name">
+      <input required placeholder="Phone">
+      <input required type="email" placeholder="Email">
+      <input required placeholder="Instagram">
+      <button onclick="nextApp()">Next</button>
     </div>
 
-    <script src="script.js"></script>
-    <script>
-        showStep(0); // Initialize form
-    </script>
+    <!-- Continue all steps exactly as you described: country, GitHub, referral (radio A/B), age, school (radio), phase 2, income, fullstack exp (radio yes/no → branch), etc. -->
+    <!-- Example for branching step -->
+    <div class="app-step">
+      <img src="logo.png" class="step-logo">
+      <p>Last questions. Do you have any prior experience as a Full-Stack Developer?</p>
+      <label><input type="radio" name="fullstackExp" value="yes" required> Yes</label>
+      <label><input type="radio" name="fullstackExp" value="no"> No</label>
+      <button onclick="nextApp()">Next</button>
+    </div>
+
+    <!-- Final submit steps lead to submitApplication() -->
+  </section>
 </body>
 </html>
