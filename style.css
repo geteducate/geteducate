@@ -1,0 +1,56 @@
+/* Base */
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+body { background: linear-gradient(135deg, #0b0b0b 0%, #1a1a1a 100%); color:#eaeaea; overflow-x:hidden; }
+a { text-decoration:none; color:inherit; }
+button { cursor:pointer; transition:0.3s; }
+
+/* Header */
+header { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; background:#141414; position:fixed; width:100%; top:0; z-index:100; }
+header .logo { font-size:24px; font-weight:bold; color:#4f46e5; }
+header nav a { margin-left:20px; font-weight:500; color:#ccc; }
+header nav a:hover { color:#fff; }
+
+/* Hero */
+.hero { display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:140px 20px 60px; }
+.hero h1 { font-size:48px; margin-bottom:20px; color:#fff; }
+.hero p { font-size:18px; color:#aaa; max-width:600px; margin-bottom:30px; }
+.hero button { padding:14px 30px; border:none; border-radius:8px; background:#4f46e5; color:#fff; font-size:16px; font-weight:bold; }
+.hero button:hover { opacity:0.9; }
+.quote { margin:20px 0; font-style:italic; font-size:16px; color:#f0f0f0; transition:0.5s; }
+
+/* Sections */
+.section { max-width:900px; margin:40px auto; padding:20px; }
+.section h2 { font-size:32px; margin-bottom:20px; color:#4f46e5; }
+.section p, .section li { color:#aaa; font-size:16px; margin-bottom:10px; }
+.section ul { list-style:none; padding-left:0; }
+
+/* Footer */
+footer { background:#141414; padding:30px 20px; text-align:center; font-size:13px; color:#777; }
+footer a { margin:0 8px; color:#777; }
+footer a:hover { color:#fff; }
+
+/* Modal */
+.modal-bg { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:none; justify-content:center; align-items:center; z-index:200; }
+.modal { background:#1a1a1a; padding:30px; border-radius:12px; width:360px; box-shadow:0 20px 40px rgba(0,0,0,.6); text-align:center; position:relative; }
+.modal h2 { margin-bottom:15px; color:#4f46e5; }
+.modal input { width:100%; padding:12px; margin-bottom:12px; border-radius:8px; border:1px solid #222; background:#0f0f0f; color:#fff; }
+.modal button { width:100%; padding:12px; border:none; border-radius:8px; background:#4f46e5; color:#fff; font-weight:600; margin-bottom:10px; }
+.close { position:absolute; top:12px; right:12px; font-size:18px; cursor:pointer; color:#aaa; }
+.close:hover { color:#fff; }
+.hidden { display:none; }
+
+/* Admin Panel */
+.admin-panel { display:none; flex-direction:column; padding:100px 20px 20px; max-width:1000px; margin:0 auto; }
+.admin-panel h1 { color:#4f46e5; margin-bottom:15px; text-align:center; }
+.stats { display:flex; justify-content:space-around; margin-bottom:40px; flex-wrap:wrap; }
+.stat { background:#1a1a1a; padding:20px; border-radius:12px; flex:1 1 200px; margin:10px; text-align:center; box-shadow:0 10px 20px rgba(0,0,0,.5); }
+.stat h2 { font-size:24px; margin-bottom:10px; color:#fff; }
+.stat p { font-size:14px; color:#aaa; }
+
+/* Multi-step Form */
+.step { display:none; flex-direction:column; gap:15px; padding:20px; background:#1a1a1a; border-radius:12px; box-shadow:0 10px 20px rgba(0,0,0,.5); max-width:500px; margin:0 auto; }
+.step.active { display:flex; animation:fadeIn 0.5s ease; }
+.step input, .step select, .step textarea { width:100%; padding:10px; border-radius:6px; border:1px solid #333; background:#0f0f0f; color:#fff; }
+.step button { background:#4f46e5; border:none; color:#fff; padding:12px; border-radius:8px; font-weight:bold; }
+.step button:hover { opacity:0.9; }
+@keyframes fadeIn { 0% {opacity:0} 100% {opacity:1} }
