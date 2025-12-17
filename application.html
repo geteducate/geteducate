@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply - GetEducate.io</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">GetEducate</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#" onclick="openModal('login')">Login</a>
+    <a href="#" onclick="openModal('register')">Register</a>
+  </nav>
+</header>
+
+<section class="section">
+  <h2>Full-Stack Developer Application</h2>
+  <p>Thank you for your interest! Please fill out the form thoroughly to increase your chances of success.</p>
+</section>
+
+<section class="steps">
+
+  <!-- Step 0: Confirmation -->
+  <div class="step active" id="step0">
+    <p>Ready to start your application?</p>
+    <button onclick="nextStep()">Apply Now</button>
+  </div>
+
+  <!-- Step 1: Personal Info -->
+  <div class="step" id="step1">
+    <label>First Name *</label>
+    <input type="text" id="firstName" placeholder="John">
+    <label>Last Name *</label>
+    <input type="text" id="lastName" placeholder="Doe">
+    <label>Phone Number *</label>
+    <input type="text" id="phone" placeholder="+19568975656">
+    <label>Email *</label>
+    <input type="email" id="email" placeholder="john@gmail.com">
+    <label>Instagram Handle</label>
+    <input type="text" id="insta" placeholder="@johndoe">
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Country -->
+  <div class="step" id="step2">
+    <p id="greetName">Awesome! It's nice to meet you.</p>
+    <label>Country *</label>
+    <input type="text" id="country" placeholder="Sweden">
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 3: GitHub Profile -->
+  <div class="step" id="step3">
+    <p id="greetName2"></p>
+    <label>GitHub Profile *</label>
+    <input type="text" id="github" placeholder="github.com/john">
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 4: Referral -->
+  <div class="step" id="step4">
+    <label>Did someone on Educate team refer you? *</label>
+    <select id="referral">
+      <option value="">Select</option>
+      <option value="Yes">Yes! Someone on the team told me to apply.</option>
+      <option value="No">No, I found this role on my own.</option>
+    </select>
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 5: Age -->
+  <div class="step" id="step5">
+    <label>How old are you? *</label>
+    <input type="number" id="age" placeholder="25">
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 6: Student status -->
+  <div class="step" id="step6">
+    <label>Are you enrolled in school/university? *</label>
+    <select id="student">
+      <option value="">Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 7: Monthly Income -->
+  <div class="step" id="step7">
+    <p>Phase 2: Professional Fitness</p>
+    <label>Current monthly gross income (USD) *</label>
+    <input type="number" id="income" placeholder="500">
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 8: Prior Full-Stack Experience -->
+  <div class="step" id="step8">
+    <label>Do you have prior experience as Full-Stack Developer? *</label>
+    <select id="fullstackExp">
+      <option value="">Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 9A: Prior Experience Details -->
+  <div class="step" id="step9A">
+    <label>Share your previous experience as developer *</label>
+    <textarea id="expDetails" rows="5" placeholder="Responsibilities, achievements, notable projects"></textarea>
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 9B: Other experience if No -->
+  <div class="step" id="step9B">
+    <label>Do you have other prior experience as developer? *</label>
+    <select id="otherExp">
+      <option value="">Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 10: Other Experience Details -->
+  <div class="step" id="step10">
+    <label>Share your other experience as developer *</label>
+    <textarea id="otherExpDetails" rows="5" placeholder="Responsibilities, achievements, notable projects"></textarea>
+    <div>
+      <button onclick="backStep()">Back</button>
+      <button onclick="submitApplication()">Submit</button>
+    </div>
+  </div>
+
+  <!-- Step 11: Final Submission Page -->
+  <div class="step" id="step11">
+    <h2>🎉 Congratulations!</h2>
+    <p>Thank you for submitting your application. We will review it and contact you via email soon.</p>
+    <img src="assets/logo.png" alt="Logo" style="width:100px;margin:20px auto;display:block;">
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+<script>
+let steps=document.querySelectorAll('.step');
+let currentStep=0;
+function showStep(index){
+  steps.forEach(s=>s.classList.remove('active'));
+  if(steps[index]) steps[index].classList.add('active');
+}
+function nextStep(){
+  // Branching logic
+  if(currentStep===8){
+    let val=document.getElementById('fullstackExp').value;
+    if(val==='Yes'){ currentStep++; showStep(currentStep); return; } 
+    else { currentStep+=2; showStep(currentStep); return; } // skip to 9B
+  }
+  if(currentStep===9BIndex()){ currentStep++; showStep(currentStep); return; }
+  currentStep++;
+  showStep(currentStep);
+}
+function backStep(){ currentStep--; showStep(currentStep); }
+function submitApplication(){
+  // collect data and store
+  let application={
+    firstName:document.getElementById('firstName').value,
+    lastName:document.getElementById('lastName').value,
+    phone:document.getElementById('phone').value,
+    email:document.getElementById('email').value,
+    insta:document.getElementById('insta').value,
+    country:document.getElementById('country').value,
+    github:document.getElementById('github').value,
+    referral:document.getElementById('referral').value,
+    age:document.getElementById('age').value,
+    student:document.getElementById('student').value,
+    income:document.getElementById('income').value,
+    fullstackExp:document.getElementById('fullstackExp').value,
+    expDetails:document.getElementById('expDetails')?document.getElementById('expDetails').value:'',
+    otherExp:document.getElementById('otherExp')?document.getElementById('otherExp').value:'',
+    otherExpDetails:document.getElementById('otherExpDetails')?document.getElementById('otherExpDetails').value:''
+  };
+  let apps=JSON.parse(localStorage.getItem('applications')||'[]');
+  apps.push(application);
+  localStorage.setItem('applications',JSON.stringify(apps));
+  currentStep++;
+  showStep(currentStep);
+}
+
+// Utility to find 9B index dynamically
+function step9BIndex(){
+  for(let i=0;i<steps.length;i++){
+    if(steps[i].id==='step9B') return i;
+  }
+  return 9; 
+}
+
+// Update greeting dynamically
+document.getElementById('step2').querySelector('p').innerText=`Awesome! It's nice to meet you, ${document.getElementById('firstName')?document.getElementById('firstName').value:'User'}.`;
+document.getElementById('step3').querySelector('p').innerText=`${document.getElementById('firstName')?document.getElementById('firstName').value:'User'}, what is your GitHub profile?`;
+</script>
+</body>
+</html>
