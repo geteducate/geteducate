@@ -3,107 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GetEducate - Learn Smarter</title>
+<title>GetEducate.io - Copywriters Hub</title>
 <style>
-  /* Reset & Base */
-  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
-  body { background:#0b0b0b; color:#eaeaea; line-height:1.6; }
-  a { color:inherit; text-decoration:none; }
-  button { cursor:pointer; }
+/* Base */
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+body { background: linear-gradient(135deg, #0b0b0b 0%, #1a1a1a 100%); color: #eaeaea; overflow-x:hidden; }
+a { text-decoration:none; color:inherit; }
+button { cursor:pointer; transition:0.3s; }
 
-  /* Header */
-  header { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; background:#141414; position:fixed; width:100%; top:0; z-index:100; }
-  header .logo { font-size:24px; font-weight:bold; color:#4f46e5; }
-  header nav a { margin-left:20px; font-weight:500; color:#ccc; transition:0.3s; }
-  header nav a:hover { color:#fff; }
+/* Header */
+header { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; background:#141414; position:fixed; width:100%; top:0; z-index:100; }
+header .logo { font-size:24px; font-weight:bold; color:#4f46e5; }
+header nav a { margin-left:20px; font-weight:500; color:#ccc; }
+header nav a:hover { color:#fff; }
 
-  /* Hero */
-  .hero { display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:140px 20px 60px; }
-  .hero h1 { font-size:48px; margin-bottom:20px; color:#fff; }
-  .hero p { font-size:18px; color:#aaa; max-width:600px; margin-bottom:30px; }
-  .hero button { padding:14px 30px; border:none; border-radius:8px; background:#4f46e5; color:#fff; font-size:16px; font-weight:bold; transition:0.3s; }
-  .hero button:hover { opacity:0.9; }
+/* Hero */
+.hero { display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:140px 20px 60px; }
+.hero h1 { font-size:48px; margin-bottom:20px; color:#fff; }
+.hero p { font-size:18px; color:#aaa; max-width:600px; margin-bottom:30px; }
+.hero button { padding:14px 30px; border:none; border-radius:8px; background:#4f46e5; color:#fff; font-size:16px; font-weight:bold; }
+.hero button:hover { opacity:0.9; }
 
-  /* Features */
-  .features { display:flex; flex-wrap:wrap; justify-content:center; padding:60px 20px; gap:30px; }
-  .feature { background:#1a1a1a; border-radius:12px; padding:30px; width:260px; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,.6); transition:0.3s; }
-  .feature:hover { transform:translateY(-5px); }
-  .feature h3 { margin-bottom:15px; color:#4f46e5; }
-  .feature p { color:#aaa; font-size:14px; }
+/* Job Listings */
+.jobs { padding:60px 20px; max-width:900px; margin:0 auto; }
+.job { background:#1a1a1a; padding:20px; border-radius:12px; margin-bottom:20px; box-shadow:0 10px 20px rgba(0,0,0,.5); }
+.job h3 { color:#4f46e5; margin-bottom:8px; }
+.job p { color:#aaa; font-size:14px; margin-bottom:10px; }
+.job button { padding:10px 20px; border:none; border-radius:6px; background:#4f46e5; color:#fff; font-weight:600; }
 
-  /* CTA Section */
-  .cta { text-align:center; padding:60px 20px; background:#141414; }
-  .cta h2 { font-size:32px; margin-bottom:20px; }
-  .cta button { padding:14px 30px; border:none; border-radius:8px; background:#4f46e5; color:#fff; font-size:16px; font-weight:bold; }
+/* Modal */
+.modal-bg { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:none; justify-content:center; align-items:center; z-index:200; }
+.modal { background:#1a1a1a; padding:30px; border-radius:12px; width:360px; box-shadow:0 20px 40px rgba(0,0,0,.6); text-align:center; position:relative; }
+.modal h2 { margin-bottom:15px; color:#4f46e5; }
+.modal input { width:100%; padding:12px; margin-bottom:12px; border-radius:8px; border:1px solid #222; background:#0f0f0f; color:#fff; }
+.modal button { width:100%; padding:12px; border:none; border-radius:8px; background:#4f46e5; color:#fff; font-weight:600; margin-bottom:10px; }
+.close { position:absolute; top:12px; right:12px; font-size:18px; cursor:pointer; color:#aaa; }
+.close:hover { color:#fff; }
+.hidden { display:none; }
 
-  /* Footer */
-  footer { background:#141414; padding:30px 20px; text-align:center; font-size:13px; color:#777; }
-  footer a { margin:0 8px; color:#777; transition:0.3s; }
-  footer a:hover { color:#fff; }
+/* Admin Panel */
+.admin-panel { display:none; flex-direction:column; padding:100px 20px 20px; max-width:1000px; margin:0 auto; }
+.admin-panel h1 { color:#4f46e5; margin-bottom:15px; text-align:center; }
+.stats { display:flex; justify-content:space-around; margin-bottom:40px; flex-wrap:wrap; }
+.stat { background:#1a1a1a; padding:20px; border-radius:12px; flex:1 1 200px; margin:10px; text-align:center; box-shadow:0 10px 20px rgba(0,0,0,.5); }
+.stat h2 { font-size:24px; margin-bottom:10px; color:#fff; }
+.stat p { font-size:14px; color:#aaa; }
 
-  /* Modal */
-  .modal-bg { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:none; justify-content:center; align-items:center; z-index:200; }
-  .modal { background:#1a1a1a; padding:30px; border-radius:12px; width:360px; box-shadow:0 20px 40px rgba(0,0,0,.6); text-align:center; position:relative; }
-  .modal h2 { margin-bottom:15px; color:#4f46e5; }
-  .modal input { width:100%; padding:12px; margin-bottom:12px; border-radius:8px; border:1px solid #222; background:#0f0f0f; color:#fff; }
-  .modal button { width:100%; padding:12px; border:none; border-radius:8px; background:#4f46e5; color:#fff; font-weight:600; margin-bottom:10px; }
-  .close { position:absolute; top:12px; right:12px; font-size:18px; cursor:pointer; color:#aaa; }
-  .close:hover { color:#fff; }
-
-  /* Animations */
-  .fade-in { animation:fadeIn 0.6s ease forwards; opacity:0; }
-  @keyframes fadeIn { to { opacity:1; } }
+/* Footer */
+footer { background:#141414; padding:30px 20px; text-align:center; font-size:13px; color:#777; }
+footer a { margin:0 8px; color:#777; }
+footer a:hover { color:#fff; }
 </style>
 </head>
 <body>
 
-<header class="fade-in">
+<header>
   <div class="logo">GetEducate</div>
   <nav>
-    <a href="#features">Features</a>
-    <a href="#cta">Get Started</a>
+    <a href="#jobs">Jobs</a>
     <a href="#" onclick="openModal('login')">Login</a>
     <a href="#" onclick="openModal('register')">Register</a>
+    <a href="#" onclick="openModal('adminLogin')">Creator Panel</a>
   </nav>
 </header>
 
-<section class="hero fade-in">
-  <h1>Learn Smarter, Not Harder</h1>
-  <p>Access AI-powered courses, editing tools, and resources. Sign up to unlock downloads and premium content.</p>
-  <button onclick="openModal('register')">Get Started</button>
+<section class="hero">
+  <h1>Top Copywriting Jobs</h1>
+  <p>Sign up to view full job details and apply. Remote, freelance, and high-paying positions curated for you.</p>
+  <button onclick="openModal('register')">Sign Up to Apply</button>
 </section>
 
-<section class="features" id="features">
-  <div class="feature fade-in">
-    <h3>AI Tools</h3>
-    <p>Use AI-assisted learning and editing tools to accelerate your skills.</p>
+<section class="jobs" id="jobs">
+  <div class="job">
+    <h3>Senior Copywriter</h3>
+    <p>Remote • Full-Time</p>
+    <p>Craft email funnels, newsletters, and ad copy for top brands. 📈 High impact work.</p>
+    <button onclick="openModal('login')">Apply Now</button>
   </div>
-  <div class="feature fade-in">
-    <h3>Download Resources</h3>
-    <p>Access exclusive downloadable content after registration.</p>
+  <div class="job">
+    <h3>Email Marketing Specialist</h3>
+    <p>Remote • Contract</p>
+    <p>Manage email campaigns, automate workflows, and optimize conversions. 💌 Growth-focused role.</p>
+    <button onclick="openModal('login')">Apply Now</button>
   </div>
-  <div class="feature fade-in">
-    <h3>Expert Courses</h3>
-    <p>Learn from professionals and structured courses for real-world skills.</p>
+  <div class="job">
+    <h3>Content Editor</h3>
+    <p>Remote • Freelance</p>
+    <p>Edit and polish blog posts, landing pages, and marketing content. ✍️ Attention to detail required.</p>
+    <button onclick="openModal('login')">Apply Now</button>
+  </div>
+  <div class="job">
+    <h3>AI Copy Specialist</h3>
+    <p>Remote • Full-Time</p>
+    <p>Leverage AI tools to create high-converting copy for ads, emails, and websites. 🤖 Cutting-edge role.</p>
+    <button onclick="openModal('login')">Apply Now</button>
   </div>
 </section>
 
-<section class="cta" id="cta">
-  <h2>Join GetEducate Today</h2>
-  <button onclick="openModal('register')">Sign Up</button>
-</section>
-
-<footer>
-  <div>
-    <a href="https://www.instagram.com/shukhrat.elmurodovv/" target="_blank">Instagram</a>
-    <a href="https://www.youtube.com/@ShukhratElmurodov" target="_blank">YouTube</a>
-    <a href="https://x.com/Shukhrat_E" target="_blank">X</a>
-    <a href="mailto:elmurodovshuhrat977@gmail.com">Email</a>
-  </div>
-  <p>&copy; 2025 GetEducate. All rights reserved.</p>
-</footer>
-
-<!-- Modal for Login/Register -->
+<!-- Modal for Login/Register/Admin -->
 <div class="modal-bg" id="modalBg">
   <div class="modal" id="registerModal">
     <span class="close" onclick="closeModal()">&times;</span>
@@ -113,6 +110,7 @@
     <button onclick="register()">Create Account</button>
     <div class="switch" onclick="toggleModal('login')">Already have an account?</div>
   </div>
+
   <div class="modal hidden" id="loginModal">
     <span class="close" onclick="closeModal()">&times;</span>
     <h2>Login</h2>
@@ -121,51 +119,112 @@
     <button onclick="login()">Login</button>
     <div class="switch" onclick="toggleModal('register')">Need an account?</div>
   </div>
+
+  <div class="modal hidden" id="adminLoginModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Creator Panel Login</h2>
+    <input type="text" id="adminUser" placeholder="Username">
+    <input type="password" id="adminPass" placeholder="Password">
+    <button onclick="loginAdmin()">Enter Panel</button>
+  </div>
 </div>
 
+<!-- Admin Panel -->
+<section class="admin-panel" id="adminPanel">
+  <h1>🔥 Creator Dashboard</h1>
+  <p style="text-align:center; margin-bottom:30px; font-style:italic;">“The way to get started is to quit talking and begin doing.” — Walt Disney</p>
+  <div class="stats">
+    <div class="stat">
+      <h2 id="totalUsers">0</h2>
+      <p>💌 Total Users</p>
+    </div>
+    <div class="stat">
+      <h2 id="newUsers">0</h2>
+      <p>📈 New Signups Today</p>
+    </div>
+    <div class="stat">
+      <h2 id="totalJobs">4</h2>
+      <p>📝 Jobs Posted</p>
+    </div>
+    <div class="stat">
+      <h2 id="adsOffers">0</h2>
+      <p>💰 Advertisement Offers</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <a href="https://www.instagram.com/shukhrat.elmurodovv/" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@ShukhratElmurodov" target="_blank">YouTube</a>
+    <a href="https://x.com/Shukhrat_E" target="_blank">X</a>
+    <a href="mailto:elmurodovshuhrat977@gmail.com">Email</a>
+  </div>
+  <p>&copy; 2025 GetEducate.io. All rights reserved.</p>
+</footer>
+
 <script>
-  function openModal(type) {
-    document.getElementById('modalBg').style.display = 'flex';
-    if(type==='login') {
-      document.getElementById('loginModal').classList.remove('hidden');
-      document.getElementById('registerModal').classList.add('hidden');
-    } else {
-      document.getElementById('registerModal').classList.remove('hidden');
-      document.getElementById('loginModal').classList.add('hidden');
-    }
+// Modal handling
+function openModal(type){
+  document.getElementById('modalBg').style.display='flex';
+  document.getElementById('registerModal').classList.add('hidden');
+  document.getElementById('loginModal').classList.add('hidden');
+  document.getElementById('adminLoginModal').classList.add('hidden');
+  if(type==='login') document.getElementById('loginModal').classList.remove('hidden');
+  else if(type==='register') document.getElementById('registerModal').classList.remove('hidden');
+  else if(type==='adminLogin') document.getElementById('adminLoginModal').classList.remove('hidden');
+}
+function closeModal(){ document.getElementById('modalBg').style.display='none'; }
+function toggleModal(type){
+  if(type==='login'){
+    document.getElementById('loginModal').classList.remove('hidden');
+    document.getElementById('registerModal').classList.add('hidden');
+  }else{
+    document.getElementById('registerModal').classList.remove('hidden');
+    document.getElementById('loginModal').classList.add('hidden');
   }
-  function closeModal() { document.getElementById('modalBg').style.display = 'none'; }
+}
 
-  function toggleModal(type) {
-    if(type==='login') {
-      document.getElementById('loginModal').classList.remove('hidden');
-      document.getElementById('registerModal').classList.add('hidden');
-    } else {
-      document.getElementById('registerModal').classList.remove('hidden');
-      document.getElementById('loginModal').classList.add('hidden');
-    }
-  }
+// User handling
+function register(){
+  const email=document.getElementById('regEmail').value;
+  const pass=document.getElementById('regPass').value;
+  if(!email||!pass){ alert('Fill all fields'); return; }
+  let users=JSON.parse(localStorage.getItem('users')||'[]');
+  users.push({email:email,password:pass});
+  localStorage.setItem('users',JSON.stringify(users));
+  alert('Registered! Please login.');
+  toggleModal('login');
+}
 
-  function register() {
-    const email = document.getElementById('regEmail').value;
-    const pass = document.getElementById('regPass').value;
-    if(!email||!pass) return alert('Fill all fields');
-    localStorage.setItem(email, pass);
-    alert('Registered! Please login.');
-    toggleModal('login');
-  }
+function login(){
+  const email=document.getElementById('logEmail').value;
+  const pass=document.getElementById('logPass').value;
+  let users=JSON.parse(localStorage.getItem('users')||'[]');
+  let found=users.find(u=>u.email===email && u.password===pass);
+  if(found){ alert('Access granted!'); closeModal(); }
+  else alert('Wrong credentials!');
+}
 
-  function login() {
-    const email = document.getElementById('logEmail').value;
-    const pass = document.getElementById('logPass').value;
-    const saved = localStorage.getItem(email);
-    if(saved === pass) {
-      alert('Access granted!');
-      closeModal();
-    } else {
-      alert('Wrong credentials!');
-    }
-  }
+// Admin login
+function loginAdmin(){
+  const user=document.getElementById('adminUser').value;
+  const pass=document.getElementById('adminPass').value;
+  if(user==='geteducateio8' && pass==='@Shuhrat2008'){
+    closeModal();
+    document.getElementById('adminPanel').style.display='flex';
+    updateStats();
+  }else{ alert('Wrong admin credentials!'); }
+}
+
+// Demo stats
+function updateStats(){
+  let users=JSON.parse(localStorage.getItem('users')||'[]');
+  document.getElementById('totalUsers').innerText=users.length;
+  document.getElementById('newUsers').innerText=Math.floor(Math.random()*5+1); // fake daily signups
+  document.getElementById('adsOffers').innerText=Math.floor(Math.random()*3); // fake ads offers
+}
+
 </script>
 
 </body>
