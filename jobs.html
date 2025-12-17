@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jobs - GetEducate.io</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">GetEducate</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#" onclick="openModal('login')">Login</a>
+    <a href="#" onclick="openModal('register')">Register</a>
+  </nav>
+</header>
+
+<section class="jobs">
+  <h2>Available Jobs</h2>
+  <div class="job">
+    <h3>Full-Stack Developer</h3>
+    <p>Remote • Full-Time</p>
+    <p>Build fast, global products with top-tier teams. 💻</p>
+    <button onclick="checkLogin()">Apply Now</button>
+  </div>
+</section>
+
+<!-- Modal reuse same as index.html -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="registerModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Register</h2>
+    <input type="email" id="regEmail" placeholder="Email">
+    <input type="password" id="regPass" placeholder="Password">
+    <button onclick="register()">Create Account</button>
+    <div class="switch" onclick="toggleModal('login')">Already have an account?</div>
+  </div>
+
+  <div class="modal hidden" id="loginModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Login</h2>
+    <input type="email" id="logEmail" placeholder="Email">
+    <input type="password" id="logPass" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <div class="switch" onclick="toggleModal('register')">Need an account?</div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+function checkLogin(){
+  let users=JSON.parse(localStorage.getItem('users')||'[]');
+  if(users.length>0) window.location.href="application.html";
+  else openModal('login');
+}
+</script>
+</body>
+</html>
