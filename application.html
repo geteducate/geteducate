@@ -1,649 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apply - GetEducate</title>
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { 
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
-  color:#fff; 
-  overflow-x:hidden;
-  line-height: 1.6;
-  min-height: 100vh;
-}
-
-/* Header */
-header { 
-  display:flex; 
-  justify-content:space-between; 
-  align-items:center; 
-  padding:20px 60px; 
-  background:rgba(10,14,39,0.95);
-  backdrop-filter: blur(10px);
-  position:fixed; 
-  width:100%; 
-  top:0; 
-  z-index:1000;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
-.logo-img {
-  height: 45px;
-  filter: drop-shadow(0 0 20px rgba(79,70,229,0.5));
-}
-.logo-text {
-  font-size: 24px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-nav { display:flex; gap:30px; align-items:center; }
-nav a { 
-  font-weight:500; 
-  color:#e0e7ff; 
-  transition:all 0.3s ease;
-}
-nav a:hover { color:#fff; }
-
-/* Application Container */
-.application-container {
-  max-width: 700px;
-  margin: 120px auto 60px;
-  padding: 0 20px;
-}
-
-.app-header {
-  text-align: center;
-  margin-bottom: 40px;
-  animation: fadeInUp 0.8s ease;
-}
-@keyframes fadeInUp {
-  from { opacity:0; transform: translateY(30px); }
-  to { opacity:1; transform: translateY(0); }
-}
-.app-header h2 {
-  font-size: 42px;
-  font-weight: 900;
-  margin-bottom: 16px;
-  background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.app-header p {
-  font-size: 18px;
-  color: #c7d2fe;
-}
-
-/* Progress Bar */
-.progress-container {
-  margin-bottom: 40px;
-  animation: fadeIn 1s ease;
-}
-@keyframes fadeIn {
-  from { opacity:0; }
-  to { opacity:1; }
-}
-.progress-bar {
-  width: 100%;
-  height: 8px;
-  background: rgba(102,126,234,0.2);
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-  border-radius: 10px;
-  transition: width 0.5s ease;
-  box-shadow: 0 0 20px rgba(102,126,234,0.5);
-}
-.progress-text {
-  text-align: center;
-  color: #a5b4fc;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-/* Step Container */
-.step {
-  display: none;
-  background: rgba(26,31,58,0.6);
-  border-radius: 24px;
-  padding: 40px;
-  border: 1px solid rgba(102,126,234,0.2);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  animation: slideIn 0.5s ease;
-}
-@keyframes slideIn {
-  from { opacity:0; transform: translateX(30px); }
-  to { opacity:1; transform: translateX(0); }
-}
-.step.active {
-  display: block;
-}
-
-.step-title {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: #fff;
-}
-
-.step p {
-  color: #c7d2fe;
-  margin-bottom: 24px;
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-/* Form Elements */
-label {
-  display: block;
-  color: #e0e7ff;
-  font-weight: 600;
-  margin-bottom: 8px;
-  font-size: 14px;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 14px 18px;
-  margin-bottom: 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(102,126,234,0.3);
-  background: rgba(10,14,39,0.6);
-  color: #fff;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  font-family: inherit;
-}
-
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
-  background: rgba(10,14,39,0.8);
-}
-
-textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-/* Buttons */
-.button-group {
-  display: flex;
-  gap: 16px;
-  margin-top: 32px;
-}
-
-button {
-  flex: 1;
-  padding: 16px 32px;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
-}
-.btn-primary:before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-.btn-primary:hover:before {
-  width: 300px;
-  height: 300px;
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(102,126,234,0.5);
-}
-.btn-primary span {
-  position: relative;
-  z-index: 1;
-}
-
-.btn-secondary {
-  background: rgba(102,126,234,0.2);
-  color: #e0e7ff;
-  border: 1px solid rgba(102,126,234,0.3);
-}
-.btn-secondary:hover {
-  background: rgba(102,126,234,0.3);
-  transform: translateY(-2px);
-}
-
-/* Success Screen */
-.success-screen {
-  text-align: center;
-  padding: 60px 40px;
-}
-.success-screen h2 {
-  font-size: 48px;
-  margin-bottom: 24px;
-  animation: bounceIn 0.8s ease;
-}
-@keyframes bounceIn {
-  0% { transform: scale(0); opacity: 0; }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
-}
-.success-screen p {
-  font-size: 18px;
-  color: #c7d2fe;
-  margin-bottom: 32px;
-  line-height: 1.7;
-}
-.success-icon {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 60px;
-  animation: pulse 2s ease infinite;
-}
-@keyframes pulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(102,126,234,0.7); }
-  50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(102,126,234,0); }
-}
-
-/* Phase Badge */
-.phase-badge {
-  display: inline-block;
-  padding: 8px 16px;
-  background: rgba(102,126,234,0.2);
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #a5b4fc;
-  margin-bottom: 16px;
-  border: 1px solid rgba(102,126,234,0.3);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  header { padding: 15px 20px; }
-  .application-container { margin-top: 100px; }
-  .app-header h2 { font-size: 32px; }
-  .step { padding: 30px 24px; }
-  .button-group { flex-direction: column; }
-  button { width: 100%; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Apply for Full-Stack Developer at GetEducate.">
+    <title>Apply - GetEducate</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Header -->
-<header>
-  <div class="logo-container" onclick="window.location.href='index.html'">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='10' y='70' font-family='Arial, sans-serif' font-size='80' font-weight='900' fill='url(%23grad)'%3EGE%3C/text%3E%3C/svg%3E" alt="GE Logo" class="logo-img">
-    <span class="logo-text">GetEducate</span>
-  </div>
-  <nav>
-    <a href="index.html">← Back to Home</a>
-  </nav>
-</header>
+    <header>
+        <div class="logo">GetEducate</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="jobs.html">Careers</a>
+            <a href="#" onclick="openModal('login')">Login</a>
+            <a href="#" onclick="openModal('register')">Register</a>
+            <a href="#" onclick="openModal('adminLogin')">Admin</a>
+        </nav>
+    </header>
 
-<!-- Application -->
-<div class="application-container">
-  
-  <div class="app-header">
-    <h2>💼 Full-Stack Developer Application</h2>
-    <p>Thank you for your interest! Please fill out the form thoroughly to increase your chances of success.</p>
-  </div>
+    <section class="hero">
+        <h1>Full-Stack Developer Application</h1>
+        <p>Thank you for your interest! Please fill out the form thoroughly to increase your chances of success.</p>
+    </section>
 
-  <!-- Progress Bar -->
-  <div class="progress-container">
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-    </div>
-    <div class="progress-text" id="progressText">Step 1 of 11</div>
-  </div>
+    <section class="section form">
+        <!-- Multi-step form steps -->
+        <div class="step active">
+            <h2>Step 1 of 11: Ready to Start?</h2>
+            <p>We're excited to learn more about you! This application will take about 5-10 minutes. Make sure you have your GitHub profile link ready.</p>
+            <button onclick="nextStep()">Let's Begin</button>
+        </div>
 
-  <!-- Steps -->
-  <div class="steps-container">
+        <div class="step">
+            <h2>Phase 1: Basic Information</h2>
+            <p>Tell us about yourself</p>
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
 
-    <!-- Step 0: Confirmation -->
-    <div class="step active" id="step0">
-      <div class="step-title">🚀 Ready to Start?</div>
-      <p>We're excited to learn more about you! This application will take about 5-10 minutes. Make sure you have your GitHub profile link ready.</p>
-      <div class="button-group">
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Let's Begin →</span>
-        </button>
-      </div>
-    </div>
+        <div class="step">
+            <h2>Where are you from?</h2>
+            <input type="text" placeholder="Your location">
+            <p>Awesome! It's nice to meet you.</p>
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
 
-    <!-- Step 1: Personal Info -->
-    <div class="step" id="step1">
-      <div class="phase-badge">📝 Phase 1: Basic Information</div>
-      <div class="step-title">Tell us about yourself</div>
-      <label>First Name *</label>
-      <input type="text" id="firstName" placeholder="John" required>
-      <label>Last Name *</label>
-      <input type="text" id="lastName" placeholder="Doe" required>
-      <label>Phone Number *</label>
-      <input type="text" id="phone" placeholder="+1 956 897 5656" required>
-      <label>Email *</label>
-      <input type="email" id="email" placeholder="john@example.com" required>
-      <label>Instagram Handle (Optional)</label>
-      <input type="text" id="insta" placeholder="@johndoe">
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Continue →</span>
-        </button>
-      </div>
-    </div>
+        <div class="step">
+            <h2>Your GitHub Profile</h2>
+            <input type="url" placeholder="https://github.com/yourusername">
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
 
-    <!-- Step 2: Country -->
-    <div class="step" id="step2">
-      <div class="step-title">🌍 Where are you from?</div>
-      <p id="greetName">Awesome! It's nice to meet you.</p>
-      <label>Country *</label>
-      <input type="text" id="country" placeholder="United States" required>
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Next →</span>
-        </button>
-      </div>
-    </div>
+        <div class="step">
+            <h2>How did you find us?</h2>
+            <select>
+                <option>Social Media</option>
+                <option>Referral</option>
+                <option>Search</option>
+            </select>
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
 
-    <!-- Step 3: GitHub Profile -->
-    <div class="step" id="step3">
-      <div class="step-title">💻 Your GitHub Profile</div>
-      <p id="greetName2"></p>
-      <label>GitHub Profile URL *</label>
-      <input type="text" id="github" placeholder="github.com/johndoe" required>
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Next →</span>
-        </button>
-      </div>
-    </div>
+        <div class="step">
+            <h2>Your Age</h2>
+            <input type="number" placeholder="e.g., 25">
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
 
-    <!-- Step 4: Referral -->
-    <div class="step" id="step4">
-      <div class="step-title">🤝 How did you find us?</div>
-      <label>Did someone on GetEducate team refer you? *</label>
-      <select id="referral" required>
-        <option value="">Select an option</option>
-        <option value="Yes">Yes! Someone on the team told me to apply.</option>
-        <option value="No">No, I found this role on my own.</option>
-      </select>
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Next →</span>
-        </button>
-      </div>
-    </div>
+        <div class="step">
+            <h2>Education Status</h2>
+            <textarea placeholder="Describe your education background"></textarea>
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
 
-    <!-- Step 5: Age -->
-    <div class="step" id="step5">
-      <div class="step-title">🎂 Your Age</div>
-      <label>How old are you? *</label>
-      <input type="number" id="age" placeholder="25" min="16" max="100" required>
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Next →</span>
-        </button>
-      </div>
-    </div>
+        <div class="step">
+            <h2>Phase 2: Professional Fitness</h2>
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
 
-    <!-- Step 6: Student status -->
-    <div class="step" id="step6">
-      <div class="step-title">🎓 Education Status</div>
-      <label>Are you currently enrolled in school/university? *</label>
-      <select id="student" required>
-        <option value="">Select an option</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Next →</span>
-        </button>
-      </div>
+        <div class="step">
+            <h2>Current Income</h2>
+            <input type="text" placeholder="e.g., $50,000/year">
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
+
+        <div class="step">
+            <h2>Your Experience</h2>
+            <textarea placeholder="Describe your professional experience"></textarea>
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
+
+        <div class="step">
+            <h2>Tell us more</h2>
+            <textarea placeholder="Why GetEducate?"></textarea>
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
+
+        <div class="step">
+            <h2>Other Development Experience</h2>
+            <textarea placeholder="Any additional skills or projects"></textarea>
+            <button onclick="backStep()">Back</button>
+            <button onclick="nextStep()">Continue</button>
+        </div>
+
+        <div class="step">
+            <h2>Your Development Journey</h2>
+            <textarea placeholder="How did you get into development?"></textarea>
+            <button onclick="backStep()">Back</button>
+            <button onclick="alert('Application Submitted!'); location.href='index.html'">Submit Application</button>
+        </div>
+
+        <div class="step success">
+            <h2>Congratulations!</h2>
+            <p>Thank you for submitting your application. We will carefully review it and contact you via email within 3-5 business days.</p>
+            <p>Keep an eye on your inbox (and spam folder) for updates!</p>
+            <button onclick="location.href='index.html'">Back to Home</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 GetEducate. All rights reserved.</p>
+        <a href="#">Privacy</a> | <a href="#">Terms</a>
+    </footer>
+
+    <!-- Modals (copy from index.html) -->
+    <div id="modalBg" class="modal-bg" onclick="closeModal()">
+        <!-- ... -->
     </div>
 
-    <!-- Step 7: Monthly Income -->
-    <div class="step" id="step7">
-      <div class="phase-badge">💼 Phase 2: Professional Fitness</div>
-      <div class="step-title">💰 Current Income</div>
-      <label>What is your current monthly gross income (USD)? *</label>
-      <input type="number" id="income" placeholder="500" min="0" required>
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Next →</span>
-        </button>
-      </div>
+    <!-- Admin Panel (copy from index.html) -->
+    <div id="adminPanel" class="admin-panel">
+        <!-- ... -->
     </div>
 
-    <!-- Step 8: Prior Full-Stack Experience -->
-    <div class="step" id="step8">
-      <div class="step-title">🔧 Your Experience</div>
-      <label>Do you have prior experience as a Full-Stack Developer? *</label>
-      <select id="fullstackExp" required>
-        <option value="">Select an option</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Next →</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Step 9A: Prior Experience Details -->
-    <div class="step" id="step9A">
-      <div class="step-title">📝 Tell us more</div>
-      <label>Share your previous experience as a Full-Stack Developer *</label>
-      <textarea id="expDetails" placeholder="Tell us about your responsibilities, achievements, and notable projects..." required></textarea>
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Next →</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Step 9B: Other experience if No -->
-    <div class="step" id="step9B">
-      <div class="step-title">💡 Other Development Experience</div>
-      <label>Do you have other prior experience as a developer? *</label>
-      <select id="otherExp" required>
-        <option value="">Select an option</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="nextStep()">
-          <span>Next →</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Step 10: Other Experience Details -->
-    <div class="step" id="step10">
-      <div class="step-title">📝 Your Development Journey</div>
-      <label>Share your other experience as a developer *</label>
-      <textarea id="otherExpDetails" placeholder="Tell us about your responsibilities, achievements, and notable projects..." required></textarea>
-      <div class="button-group">
-        <button class="btn-secondary" onclick="backStep()">← Back</button>
-        <button class="btn-primary" onclick="submitApplication()">
-          <span>Submit Application ✓</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Step 11: Success -->
-    <div class="step" id="step11">
-      <div class="success-screen">
-        <div class="success-icon">🎉</div>
-        <h2>Congratulations!</h2>
-        <p>Thank you for submitting your application. We will carefully review it and contact you via email within 3-5 business days.</p>
-        <p style="color:#a5b4fc; font-size:16px;">Keep an eye on your inbox (and spam folder) for updates!</p>
-        <button class="btn-primary" onclick="window.location.href='index.html'" style="max-width:300px; margin:24px auto 0;">
-          <span>← Back to Home</span>
-        </button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<script>
-let steps = document.querySelectorAll('.step');
-let currentStep = 0;
-const totalSteps = 11;
-
-function updateProgress() {
-  const progress = (currentStep / totalSteps) * 100;
-  document.getElementById('progressFill').style.width = progress + '%';
-  document.getElementById('progressText').innerText = `Step ${currentStep + 1} of ${totalSteps + 1}`;
-}
-
-function showStep(index) {
-  steps.forEach(s => s.classList.remove('active'));
-  if(steps[index]) {
-    steps[index].classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-  updateProgress();
-}
-
-function nextStep() {
-  // Update greetings with user's name
-  if(currentStep === 1) {
-    const firstName = document.getElementById('firstName').value;
-    if(!firstName) {
-      alert('⚠️ Please fill in all required fields');
-      return;
-    }
-    document.getElementById('greetName').innerText = `Awesome! It's nice to meet you, ${firstName}.`;
-    document.getElementById('greetName2').innerText = `${firstName}, what is your GitHub profile?`;
-  }
-
-  // Branching logic for step 8
-  if(currentStep === 8) {
-    const val = document.getElementById('fullstackExp').value;
-    if(!val) {
-      alert('⚠️ Please select an option');
-      return;
-    }
-    if(val === 'Yes') {
-      currentStep = 9; // Go to step9A
-    } else {
-      currentStep = 10; // Go to step9B
-    }
-    showStep(currentStep);
-    return;
-  }
-
-  // Handle step 9B branching
-  if(currentStep === 10 && steps[currentStep].id === 'step9B') {
-    const val = document.getElementById('otherExp').value;
-    if(!val) {
-      alert('⚠️ Please select an option');
-      return;
-    }
-    if(val === 'Yes') {
-      currentStep = 11; // Go to step10
-    } else {
-      // Skip to submission
-      submitApplication();
-      return;
-    }
-    showStep(currentStep);
-    return;
-  }
-
-  currentStep++;
-  showStep(currentStep);
-}
-
-function backStep() {
-  currentStep--;
-  showStep(currentStep);
-}
-
-function submitApplication() {
-  // Collect all data
-  const application = {
-    firstName: document.getElementById('firstName').value,
-    lastName: document.getElementById('lastName').value,
-    phone: document.getElementById('phone').value,
-    email: document.getElementById('email').value,
-    insta: document.getElementById('insta').value,
-    country: document.getElementById('country').value,
-    github: document.getElementById('github').value,
-    referral: document.getElementById('referral').value,
-    age: document.getElementById('age').value,
-    student: document.getElementById('student').value,
-    income: document.getElementById('income').value,
-    fullstackExp: document.getElementById('fullstackExp').value,
-    expDetails: document.getElementById('expDetails') ? document.getElementById('expDetails').value : '',
-    otherExp: document.getElementById('otherExp') ? document.getElementById('otherExp').value : '',
-    otherExpDetails: document.getElementById('otherExpDetails') ? document.getElementById('otherExpDetails').value : '',
-    timestamp: new Date().toISOString()
-  };
-
-  // Store in localStorage
-  let apps = JSON.parse(localStorage.getItem('applications') || '[]');
-  apps.push(application);
-  localStorage.setItem('applications', JSON.stringify(apps));
-
-  // Show success screen
-  currentStep = 11;
-  showStep(currentStep);
-  
-  // Confetti effect (simple version)
-  console.log('🎉 Application submitted successfully!', application);
-}
-
-// Initialize
-showStep(0);
-</script>
+    <script src="script.js"></script>
+    <script>
+        showStep(0); // Initialize form
+    </script>
 </body>
 </html>
