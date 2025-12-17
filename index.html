@@ -1,30 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GetEducate</title><link rel="stylesheet" href="style.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GetEducate</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<header>
-  <div class="logo"><img src="logo.png" alt="GE Logo"></div>
-  <nav><a href="#" onclick="openModal('login')">Login</a><a href="#" onclick="openModal('register')">Register</a></nav>
-</header>
-<section class="section">
-  <h1>GetEducate – Empowering the Next Generation of Digital Creators</h1>
-  <p class="quote active" id="quote"></p>
-  <img src="https://www.shutterstock.com/image-vector/remote-work-education-concept-vector-260nw-2620029775.jpg" alt="Remote learning" class="hero-img">
-  <h2>Why We Started GetEducate</h2>
-  <p>To fix broken education – giving practical copywriting, sales, and business skills that actually make money.</p>
-  <h2>Created By</h2>
-  <p>Shukhrat Elmurodov – follow on Instagram @shukhrat.elmurodovv, YouTube @ShukhratElmurodov, X @Shukhrat_E.</p>
-  <h2>What We Offer</h2>
-  <ul><li>Exclusive remote opportunities</li><li>Skill tracking & mentorship</li><li>Global community</li></ul>
-  <h2>Benefits</h2>
-  <ul><li>Land high-paying gigs</li><li>Build real income streams</li><li>Get expert guidance</li></ul>
-  <h2>Success Stories</h2>
-  <img src="https://ezycourse.b-cdn.net/2422/cmbunnwva00mr4x9nh1nx0irn.jpg" alt="Success" class="hero-img">
-  <ul><li>“Made $10k/month freelance!” – Member A</li><li>“Scaled my agency fast” – Member B</li></ul>
-  <h2>Contact</h2>
-  <p>Email: elmurodovshuhrat977@gmail.com<br>Instagram | YouTube | X</p>
-  <button onclick="checkLogin('jobs.html')">Apply for Jobs</button>
-</section>
-<!-- Modals for login/register + verify step -->
-<script src="script.js"></script>
-</body></html>
+  <header>
+    <div class="logo"><img src="logo.png" alt="GE Logo"></div>
+    <nav>
+      <a onclick="requireLogin('index.html')">Home</a>
+      <a onclick="requireLogin('jobs.html')">Careers</a>
+      <a id="authLink" onclick="isLoggedIn() ? logout() : openModal('login')">${isLoggedIn() ? 'Logout' : 'Login/Register'}</a>
+    </nav>
+  </header>
+
+  <div id="modalBg" class="modal-bg" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div id="loginModal" class="modal-content">
+        <h2>Login</h2>
+        <input id="logEmail" type="email" placeholder="Email" required>
+        <input id="logPass" type="password" placeholder="Password" required>
+        <button class="btn" onclick="login()">Login</button>
+      </div>
+      <div id="registerModal" class="modal-content hidden">
+        <h2>Register</h2>
+        <input id="regEmail" type="email" placeholder="Email" required>
+        <input id="regPass" type="password" placeholder="Password" required>
+        <button class="btn" onclick="register()">Register</button>
+      </div>
+      <div id="verifyModal" class="modal-content hidden">
+        <h2>Verify Code</h2>
+        <input id="verifyInput" type="number" placeholder="4-digit code">
+        <button class="btn" onclick="verifyCode()">Verify</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <h1>GetEducate – Empowering Digital Creators</h1>
+    <p id="quote" class="quote active"></p>
+    <img src="https://img.freepik.com/free-vector/online-learning-isometric-concept_1284-21807.jpg" alt="Online education" class="hero-img">
+
+    <h2>Why We Started GetEducate</h2>
+    <p>To revolutionize education with practical copywriting, sales, and business skills that lead to real income.</p>
+
+    <h2>Created By</h2>
+    <p>Shukhrat Elmurodov – @shukhrat.elmurodovv (IG), @ShukhratElmurodov (YT), @Shukhrat_E (X)</p>
+
+    <h2>Functions & Benefits</h2>
+    <ul>
+      <li>Exclusive remote opportunities & gigs</li>
+      <li>Track growth, earnings, milestones</li>
+      <li>Personalized mentorship from experts</li>
+      <li>Join motivated global community</li>
+      <li>Turn skills into high-income streams</li>
+    </ul>
+
+    <h2>Success Stories</h2>
+    <img src="https://img.freepik.com/free-vector/business-team-celebrating-success_74855-7587.jpg" alt="Success" class="hero-img">
+    <ul>
+      <li>“Landed $10k/month clients!” – Member</li>
+      <li>“Built agency from zero” – Member</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>elmurodovshuhrat977@gmail.com<br>Follow on IG/YT/X</p>
+
+    <button class="btn" onclick="requireLogin('jobs.html')">Apply for Jobs</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
