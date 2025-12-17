@@ -1,596 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GetEducate - Empower Your Future</title>
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { 
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
-  color:#fff; 
-  overflow-x:hidden;
-  line-height: 1.6;
-}
-a { text-decoration:none; color:inherit; }
-
-/* Header */
-header { 
-  display:flex; 
-  justify-content:space-between; 
-  align-items:center; 
-  padding:20px 60px; 
-  background:rgba(10,14,39,0.95);
-  backdrop-filter: blur(10px);
-  position:fixed; 
-  width:100%; 
-  top:0; 
-  z-index:1000;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  animation: slideDown 0.6s ease;
-}
-@keyframes slideDown {
-  from { transform: translateY(-100%); opacity:0; }
-  to { transform: translateY(0); opacity:1; }
-}
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.logo-img {
-  height: 45px;
-  filter: drop-shadow(0 0 20px rgba(79,70,229,0.5));
-  transition: transform 0.3s ease;
-}
-.logo-img:hover {
-  transform: scale(1.05) rotate(2deg);
-}
-.logo-text {
-  font-size: 24px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-nav { display:flex; gap:30px; align-items:center; }
-nav a { 
-  font-weight:500; 
-  color:#e0e7ff; 
-  transition:all 0.3s ease;
-  position: relative;
-  padding: 8px 0;
-}
-nav a:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  transition: width 0.3s ease;
-}
-nav a:hover:after { width: 100%; }
-nav a:hover { color:#fff; transform: translateY(-2px); }
-.cta-btn {
-  padding: 10px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 25px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-.cta-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(102,126,234,0.4);
-  border-color: rgba(255,255,255,0.2);
-}
-
-/* Hero */
-.hero { 
-  display:flex; 
-  flex-direction:column; 
-  justify-content:center; 
-  align-items:center; 
-  text-align:center; 
-  padding:180px 40px 100px;
-  min-height: 90vh;
-  position: relative;
-  overflow: hidden;
-}
-.hero:before {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(102,126,234,0.15) 0%, transparent 70%);
-  top: -200px;
-  right: -200px;
-  animation: float 8s ease-in-out infinite;
-}
-.hero:after {
-  content: '';
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(118,75,162,0.15) 0%, transparent 70%);
-  bottom: -100px;
-  left: -100px;
-  animation: float 6s ease-in-out infinite reverse;
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-30px) rotate(5deg); }
-}
-.hero-content {
-  position: relative;
-  z-index: 1;
-  animation: fadeInUp 1s ease;
-}
-@keyframes fadeInUp {
-  from { opacity:0; transform: translateY(40px); }
-  to { opacity:1; transform: translateY(0); }
-}
-.hero h1 { 
-  font-size:64px; 
-  font-weight:900; 
-  margin-bottom:24px; 
-  background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -1px;
-  line-height: 1.1;
-}
-.hero p { 
-  font-size:20px; 
-  color:#c7d2fe; 
-  max-width:700px; 
-  margin:0 auto 40px;
-  line-height: 1.7;
-}
-.hero-btn { 
-  padding:18px 48px; 
-  border:none; 
-  border-radius:50px; 
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color:#fff; 
-  font-size:18px; 
-  font-weight:700;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  box-shadow: 0 10px 40px rgba(102,126,234,0.3);
-  position: relative;
-  overflow: hidden;
-}
-.hero-btn:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  transition: left 0.5s;
-}
-.hero-btn:hover:before { left: 100%; }
-.hero-btn:hover { 
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 15px 50px rgba(102,126,234,0.5);
-}
-.quote { 
-  margin:40px auto 0; 
-  font-style:italic; 
-  font-size:18px; 
-  color:#a5b4fc;
-  max-width: 600px;
-  padding: 20px 30px;
-  background: rgba(102,126,234,0.1);
-  border-left: 4px solid #667eea;
-  border-radius: 8px;
-  transition: all 0.5s ease;
-  animation: fadeIn 1s ease 0.5s both;
-}
-@keyframes fadeIn {
-  from { opacity:0; }
-  to { opacity:1; }
-}
-
-/* Sections */
-.section { 
-  max-width:1200px; 
-  margin:80px auto; 
-  padding:60px 40px;
-  background: rgba(26,31,58,0.6);
-  border-radius: 24px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  animation: fadeInUp 0.8s ease;
-}
-.section h2 { 
-  font-size:42px; 
-  margin-bottom:32px; 
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 800;
-  text-align: center;
-}
-.section p { 
-  color:#c7d2fe; 
-  font-size:18px; 
-  margin-bottom:24px;
-  line-height: 1.8;
-}
-.section ul { 
-  list-style:none; 
-  padding:0;
-  display: grid;
-  gap: 20px;
-}
-.section li { 
-  color:#e0e7ff; 
-  font-size:18px; 
-  padding: 24px 28px;
-  background: rgba(102,126,234,0.1);
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(102,126,234,0.2);
-  cursor: pointer;
-}
-.section li:hover {
-  background: rgba(102,126,234,0.2);
-  transform: translateX(10px);
-  box-shadow: 0 10px 30px rgba(102,126,234,0.2);
-}
-
-/* Contact Section */
-.contact-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;
-  margin-top: 32px;
-}
-.contact-item {
-  background: rgba(102,126,234,0.1);
-  padding: 20px;
-  border-radius: 16px;
-  text-align: center;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(102,126,234,0.2);
-}
-.contact-item:hover {
-  background: rgba(102,126,234,0.2);
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(102,126,234,0.3);
-}
-.contact-item a {
-  color: #a5b4fc;
-  font-weight: 600;
-  transition: color 0.3s;
-}
-.contact-item a:hover {
-  color: #fff;
-}
-
-/* Footer */
-footer { 
-  background:rgba(10,14,39,0.95);
-  padding:40px; 
-  text-align:center; 
-  font-size:14px; 
-  color:#a5b4fc;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Modal */
-.modal-bg { 
-  position:fixed; 
-  top:0; 
-  left:0; 
-  width:100%; 
-  height:100%; 
-  background:rgba(0,0,0,0.85);
-  backdrop-filter: blur(10px);
-  display:none; 
-  justify-content:center; 
-  align-items:center; 
-  z-index:2000;
-  animation: fadeIn 0.3s ease;
-}
-.modal { 
-  background: linear-gradient(135deg, #1a1f3a 0%, #0f1229 100%);
-  padding:40px; 
-  border-radius:24px; 
-  width:420px; 
-  box-shadow:0 30px 80px rgba(0,0,0,0.6);
-  text-align:center; 
-  position:relative;
-  border: 1px solid rgba(102,126,234,0.3);
-  animation: slideIn 0.4s ease;
-}
-@keyframes slideIn {
-  from { transform: scale(0.9) translateY(30px); opacity:0; }
-  to { transform: scale(1) translateY(0); opacity:1; }
-}
-.modal h2 { 
-  margin-bottom:24px; 
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 32px;
-  font-weight: 800;
-}
-.modal input { 
-  width:100%; 
-  padding:16px 20px; 
-  margin-bottom:16px; 
-  border-radius:12px; 
-  border:1px solid rgba(102,126,234,0.3);
-  background:rgba(10,14,39,0.6);
-  color:#fff;
-  font-size: 16px;
-  transition: all 0.3s ease;
-}
-.modal input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
-}
-.modal button { 
-  width:100%; 
-  padding:16px; 
-  border:none; 
-  border-radius:12px; 
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color:#fff; 
-  font-weight:700;
-  font-size: 16px;
-  margin-bottom:16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.modal button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(102,126,234,0.4);
-}
-.close { 
-  position:absolute; 
-  top:16px; 
-  right:20px; 
-  font-size:28px; 
-  cursor:pointer; 
-  color:#a5b4fc;
-  transition: all 0.3s ease;
-}
-.close:hover { 
-  color:#fff;
-  transform: rotate(90deg);
-}
-.switch {
-  color: #a5b4fc;
-  cursor: pointer;
-  font-size: 14px;
-  transition: color 0.3s;
-}
-.switch:hover {
-  color: #fff;
-}
-.hidden { display:none; }
-
-/* Responsive */
-@media (max-width: 768px) {
-  header { padding: 15px 20px; }
-  nav { gap: 15px; }
-  .hero h1 { font-size: 42px; }
-  .hero p { font-size: 16px; }
-  .section h2 { font-size: 32px; }
-  .modal { width: 90%; padding: 30px; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GetEducate - Empower your future with exclusive opportunities and expert guidance.">
+    <title>GetEducate - Empower Your Future</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Header -->
-<header>
-  <div class="logo-container">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='10' y='70' font-family='Arial, sans-serif' font-size='80' font-weight='900' fill='url(%23grad)'%3EGE%3C/text%3E%3C/svg%3E" alt="GE Logo" class="logo-img">
-    <span class="logo-text">GetEducate</span>
-  </div>
-  <nav>
-    <a href="#benefits">Benefits</a>
-    <a href="#success">Success Stories</a>
-    <a href="#" onclick="openModal('login')">Login</a>
-    <a href="#" onclick="openModal('register')" class="cta-btn">Register</a>
-  </nav>
-</header>
+    <header>
+        <div class="logo">GetEducate</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="jobs.html">Careers</a>
+            <a href="#" onclick="openModal('login')">Login</a>
+            <a href="#" onclick="openModal('register')">Register</a>
+            <a href="#" onclick="openModal('adminLogin')">Admin</a>
+        </nav>
+    </header>
 
-<!-- Hero Section -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>✨ Empower Your Future with GetEducate</h1>
-    <p>Find opportunities, learn from top copywriters, monetize your skills, and grow your career. Join thousands who leveled up through our platform.</p>
-    <button class="hero-btn" onclick="window.location.href='jobs.html'">🚀 Explore Opportunities</button>
-    <div class="quote" id="rotatingQuote">"The way to get started is to quit talking and begin doing." — Walt Disney</div>
-  </div>
-</section>
+    <section class="hero">
+        <h1>GetEducate - Empower Your Future</h1>
+        <p id="rotatingQuote">“The way to get started is to quit talking and begin doing.” — Walt Disney</p>
+        <button onclick="location.href='jobs.html'">Explore Opportunities</button>
+    </section>
 
-<!-- Benefits Section -->
-<section id="benefits" class="section">
-  <h2>🎯 Why GetEducate?</h2>
-  <ul>
-    <li>💡 Access exclusive copywriting and business opportunities</li>
-    <li>📈 Track your growth, earnings, and career milestones</li>
-    <li>🌐 Join a global community of motivated creators</li>
-    <li>🎯 Get personalized guidance from experts</li>
-  </ul>
-</section>
+    <section class="section">
+        <h2>Why GetEducate?</h2>
+        <ul>
+            <li>Access exclusive copywriting and business opportunities</li>
+            <li>Track your growth, earnings, and career milestones</li>
+            <li>Join a global community of motivated creators</li>
+            <li>Get personalized guidance from experts</li>
+        </ul>
+    </section>
 
-<!-- Success Stories -->
-<section id="success" class="section">
-  <h2>🌟 Success Stories</h2>
-  <p style="text-align:center;">Thousands of users have transformed their skills into income and global recognition.</p>
-  <ul style="margin-top:32px;">
-    <li>💰 "GetEducate helped me land my first freelance client worth $5,000!" — Alex P.</li>
-    <li>📱 "I grew my Instagram following and monetized my content thanks to GE's insights." — Maya R.</li>
-    <li>🎓 "The career guidance and application system made me confident to apply for top remote positions." — John K.</li>
-  </ul>
-</section>
+    <section class="section testimonials">
+        <h2>Success Stories</h2>
+        <p>Thousands of users have transformed their skills into income and global recognition.</p>
+        <ul>
+            <li>“GetEducate helped me land my first freelance client worth $5,000!” — Alex P.</li>
+            <li>“I grew my Instagram following and monetized my content thanks to GE's insights.” — Maya R.</li>
+            <li>“The career guidance and application system made me confident to apply for top remote positions.” — John K.</li>
+        </ul>
+    </section>
 
-<!-- Contact -->
-<section class="section">
-  <h2>📬 Contact Us</h2>
-  <div class="contact-links">
-    <div class="contact-item">
-      <p>📧 Email</p>
-      <a href="mailto:elmurodovshuhrat977@gmail.com">Get in Touch</a>
+    <section class="section contact">
+        <h2>Contact Us</h2>
+        <p>
+            <a href="mailto:elmurodovshuhrat977@gmail.com">Email: Get in Touch</a><br>
+            <a href="https://www.instagram.com/shukhrat.elmurodovv/">Instagram: @shukhrat.elmurodovv</a><br>
+            <a href="https://www.youtube.com/@ShukhratElmurodov">YouTube: ShukhratElmurodov</a><br>
+            <a href="https://x.com/Shukhrat_E">X (Twitter): @Shukhrat_E</a>
+        </p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 GetEducate. All rights reserved.</p>
+        <a href="#">Privacy</a> | <a href="#">Terms</a>
+    </footer>
+
+    <!-- Modals from your JS -->
+    <div id="modalBg" class="modal-bg" onclick="closeModal()">
+        <div id="loginModal" class="modal hidden" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Login</h2>
+            <input id="logEmail" type="email" placeholder="Email">
+            <input id="logPass" type="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <p>Not registered? <a href="#" onclick="toggleModal('register')">Sign up</a></p>
+        </div>
+        <div id="registerModal" class="modal hidden" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Register</h2>
+            <input id="regEmail" type="email" placeholder="Email">
+            <input id="regPass" type="password" placeholder="Password">
+            <button onclick="register()">Register</button>
+            <p>Already have an account? <a href="#" onclick="toggleModal('login')">Login</a></p>
+        </div>
+        <div id="adminLoginModal" class="modal hidden" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Admin Login</h2>
+            <input id="adminUser" type="text" placeholder="Username">
+            <input id="adminPass" type="password" placeholder="Password">
+            <button onclick="loginAdmin()">Login</button>
+        </div>
     </div>
-    <div class="contact-item">
-      <p>📸 Instagram</p>
-      <a href="https://www.instagram.com/shukhrat.elmurodovv/" target="_blank">@shukhrat.elmurodovv</a>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <h1>Admin Dashboard</h1>
+        <div class="stats">
+            <div class="stat"><h2 id="totalUsers">0</h2><p>Total Users</p></div>
+            <div class="stat"><h2 id="newUsers">0</h2><p>New Users (Today)</p></div>
+            <div class="stat"><h2 id="adsOffers">0</h2><p>Ads Offers</p></div>
+        </div>
     </div>
-    <div class="contact-item">
-      <p>🎥 YouTube</p>
-      <a href="https://www.youtube.com/@ShukhratElmurodov" target="_blank">ShukhratElmurodov</a>
-    </div>
-    <div class="contact-item">
-      <p>🐦 X (Twitter)</p>
-      <a href="https://x.com/Shukhrat_E" target="_blank">@Shukhrat_E</a>
-    </div>
-  </div>
-</section>
 
-<!-- Footer -->
-<footer>
-  <p>© 2025 GetEducate. All rights reserved. Built with 💜</p>
-</footer>
-
-<!-- Modals: Login & Register -->
-<div class="modal-bg" id="modalBg">
-  <!-- Register Modal -->
-  <div class="modal" id="registerModal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h2>Create Account</h2>
-    <input type="email" id="regEmail" placeholder="Enter your email">
-    <input type="password" id="regPass" placeholder="Choose a password">
-    <button onclick="register()">Sign Up</button>
-    <div class="switch" onclick="toggleModal('login')">Already have an account? Login</div>
-  </div>
-  
-  <!-- Login Modal -->
-  <div class="modal hidden" id="loginModal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h2>Welcome Back</h2>
-    <input type="email" id="logEmail" placeholder="Enter your email">
-    <input type="password" id="logPass" placeholder="Enter your password">
-    <button onclick="login()">Login</button>
-    <div class="switch" onclick="toggleModal('register')">Need an account? Sign up</div>
-  </div>
-  
-  <!-- Admin Login Modal -->
-  <div class="modal hidden" id="adminLoginModal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h2>Admin Panel</h2>
-    <input type="text" id="adminUser" placeholder="Username">
-    <input type="password" id="adminPass" placeholder="Password">
-    <button onclick="loginAdmin()">Enter Panel</button>
-  </div>
-</div>
-
-<script>
-/* Modal Functions */
-function openModal(type){
-  document.getElementById('modalBg').style.display='flex';
-  document.getElementById('registerModal').classList.add('hidden');
-  document.getElementById('loginModal').classList.add('hidden');
-  document.getElementById('adminLoginModal').classList.add('hidden');
-  if(type==='login') document.getElementById('loginModal').classList.remove('hidden');
-  else if(type==='register') document.getElementById('registerModal').classList.remove('hidden');
-  else if(type==='adminLogin') document.getElementById('adminLoginModal').classList.remove('hidden');
-}
-function closeModal(){ document.getElementById('modalBg').style.display='none'; }
-function toggleModal(type){
-  if(type==='login'){
-    document.getElementById('loginModal').classList.remove('hidden');
-    document.getElementById('registerModal').classList.add('hidden');
-  }else{
-    document.getElementById('registerModal').classList.remove('hidden');
-    document.getElementById('loginModal').classList.add('hidden');
-  }
-}
-
-/* User Functions */
-function register(){
-  const email=document.getElementById('regEmail').value;
-  const pass=document.getElementById('regPass').value;
-  if(!email||!pass){ alert('Please fill all fields'); return; }
-  let users=JSON.parse(localStorage.getItem('users')||'[]');
-  users.push({email:email,password:pass});
-  localStorage.setItem('users',JSON.stringify(users));
-  alert('✅ Registered successfully! Please login to continue.');
-  toggleModal('login');
-}
-
-function login(){
-  const email=document.getElementById('logEmail').value;
-  const pass=document.getElementById('logPass').value;
-  let users=JSON.parse(localStorage.getItem('users')||'[]');
-  let found=users.find(u=>u.email===email && u.password===pass);
-  if(found){ 
-    alert('🎉 Welcome back!'); 
-    closeModal(); 
-  } else {
-    alert('❌ Wrong credentials! Please try again.');
-  }
-}
-
-function loginAdmin(){
-  const user=document.getElementById('adminUser').value;
-  const pass=document.getElementById('adminPass').value;
-  if(user==='geteducateio8' && pass==='@Shuhrat2008'){
-    alert('✅ Admin access granted!');
-    closeModal();
-    // Show admin panel logic here
-  }else{ 
-    alert('❌ Wrong admin credentials!'); 
-  }
-}
-
-/* Quote Rotation */
-const quotes=[
-  ""The way to get started is to quit talking and begin doing." — Walt Disney",
-  ""Marketing is really just about sharing your passion." — Michael Hyatt",
-  ""Copywriting is salesmanship in print." — Robert Bly",
-  ""Make every detail perfect and limit the number of details to perfect." — Jack Dorsey",
-  ""Don't find customers for your products, find products for your customers." — Seth Godin",
-  ""Good copy can sell anything." — David Ogilvy"
-];
-let qIndex=0;
-setInterval(()=>{
-  qIndex=(qIndex+1)%quotes.length;
-  const quoteEl = document.getElementById('rotatingQuote');
-  quoteEl.style.opacity = '0';
-  setTimeout(() => {
-    quoteEl.innerText = quotes[qIndex];
-    quoteEl.style.opacity = '1';
-  }, 300);
-},8000);
-
-/* Smooth Scrolling */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if(target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
