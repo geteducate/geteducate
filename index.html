@@ -1,102 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GetEducate - Empower your future with exclusive opportunities and expert guidance.">
-    <title>GetEducate - Empower Your Future</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GetEducate</title><link rel="stylesheet" href="style.css"></head>
 <body>
-    <header>
-        <div class="logo">GetEducate</div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="jobs.html">Careers</a>
-            <a href="#" onclick="openModal('login')">Login</a>
-            <a href="#" onclick="openModal('register')">Register</a>
-            <a href="#" onclick="openModal('adminLogin')">Admin</a>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <h1>GetEducate - Empower Your Future</h1>
-        <p id="rotatingQuote">“The way to get started is to quit talking and begin doing.” — Walt Disney</p>
-        <button onclick="location.href='jobs.html'">Explore Opportunities</button>
-    </section>
-
-    <section class="section">
-        <h2>Why GetEducate?</h2>
-        <ul>
-            <li>Access exclusive copywriting and business opportunities</li>
-            <li>Track your growth, earnings, and career milestones</li>
-            <li>Join a global community of motivated creators</li>
-            <li>Get personalized guidance from experts</li>
-        </ul>
-    </section>
-
-    <section class="section testimonials">
-        <h2>Success Stories</h2>
-        <p>Thousands of users have transformed their skills into income and global recognition.</p>
-        <ul>
-            <li>“GetEducate helped me land my first freelance client worth $5,000!” — Alex P.</li>
-            <li>“I grew my Instagram following and monetized my content thanks to GE's insights.” — Maya R.</li>
-            <li>“The career guidance and application system made me confident to apply for top remote positions.” — John K.</li>
-        </ul>
-    </section>
-
-    <section class="section contact">
-        <h2>Contact Us</h2>
-        <p>
-            <a href="mailto:elmurodovshuhrat977@gmail.com">Email: Get in Touch</a><br>
-            <a href="https://www.instagram.com/shukhrat.elmurodovv/">Instagram: @shukhrat.elmurodovv</a><br>
-            <a href="https://www.youtube.com/@ShukhratElmurodov">YouTube: ShukhratElmurodov</a><br>
-            <a href="https://x.com/Shukhrat_E">X (Twitter): @Shukhrat_E</a>
-        </p>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 GetEducate. All rights reserved.</p>
-        <a href="#">Privacy</a> | <a href="#">Terms</a>
-    </footer>
-
-    <!-- Modals from your JS -->
-    <div id="modalBg" class="modal-bg" onclick="closeModal()">
-        <div id="loginModal" class="modal hidden" onclick="event.stopPropagation()">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Login</h2>
-            <input id="logEmail" type="email" placeholder="Email">
-            <input id="logPass" type="password" placeholder="Password">
-            <button onclick="login()">Login</button>
-            <p>Not registered? <a href="#" onclick="toggleModal('register')">Sign up</a></p>
-        </div>
-        <div id="registerModal" class="modal hidden" onclick="event.stopPropagation()">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Register</h2>
-            <input id="regEmail" type="email" placeholder="Email">
-            <input id="regPass" type="password" placeholder="Password">
-            <button onclick="register()">Register</button>
-            <p>Already have an account? <a href="#" onclick="toggleModal('login')">Login</a></p>
-        </div>
-        <div id="adminLoginModal" class="modal hidden" onclick="event.stopPropagation()">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Admin Login</h2>
-            <input id="adminUser" type="text" placeholder="Username">
-            <input id="adminPass" type="password" placeholder="Password">
-            <button onclick="loginAdmin()">Login</button>
-        </div>
-    </div>
-
-    <!-- Admin Panel -->
-    <div id="adminPanel" class="admin-panel">
-        <h1>Admin Dashboard</h1>
-        <div class="stats">
-            <div class="stat"><h2 id="totalUsers">0</h2><p>Total Users</p></div>
-            <div class="stat"><h2 id="newUsers">0</h2><p>New Users (Today)</p></div>
-            <div class="stat"><h2 id="adsOffers">0</h2><p>Ads Offers</p></div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<header>
+  <div class="logo"><img src="logo.png" alt="GE Logo"></div>
+  <nav><a href="#" onclick="openModal('login')">Login</a><a href="#" onclick="openModal('register')">Register</a></nav>
+</header>
+<section class="section">
+  <h1>GetEducate – Empowering the Next Generation of Digital Creators</h1>
+  <p class="quote active" id="quote"></p>
+  <img src="https://www.shutterstock.com/image-vector/remote-work-education-concept-vector-260nw-2620029775.jpg" alt="Remote learning" class="hero-img">
+  <h2>Why We Started GetEducate</h2>
+  <p>To fix broken education – giving practical copywriting, sales, and business skills that actually make money.</p>
+  <h2>Created By</h2>
+  <p>Shukhrat Elmurodov – follow on Instagram @shukhrat.elmurodovv, YouTube @ShukhratElmurodov, X @Shukhrat_E.</p>
+  <h2>What We Offer</h2>
+  <ul><li>Exclusive remote opportunities</li><li>Skill tracking & mentorship</li><li>Global community</li></ul>
+  <h2>Benefits</h2>
+  <ul><li>Land high-paying gigs</li><li>Build real income streams</li><li>Get expert guidance</li></ul>
+  <h2>Success Stories</h2>
+  <img src="https://ezycourse.b-cdn.net/2422/cmbunnwva00mr4x9nh1nx0irn.jpg" alt="Success" class="hero-img">
+  <ul><li>“Made $10k/month freelance!” – Member A</li><li>“Scaled my agency fast” – Member B</li></ul>
+  <h2>Contact</h2>
+  <p>Email: elmurodovshuhrat977@gmail.com<br>Instagram | YouTube | X</p>
+  <button onclick="checkLogin('jobs.html')">Apply for Jobs</button>
+</section>
+<!-- Modals for login/register + verify step -->
+<script src="script.js"></script>
+</body></html>
