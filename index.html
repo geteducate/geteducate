@@ -3,64 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GetEducate.io - Copywriters Hub</title>
+<title>GE - GetEducation</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- Header -->
 <header>
-  <div class="logo">GetEducate</div>
+  <div class="logo"><img src="assets/logo.png" alt="GE Logo" style="height:40px;"></div>
   <nav>
-    <a href="#about">About</a>
     <a href="#benefits">Benefits</a>
     <a href="#success">Success Stories</a>
-    <a href="#contact">Contact</a>
     <a href="#" onclick="openModal('login')">Login</a>
     <a href="#" onclick="openModal('register')">Register</a>
-    <a href="#" onclick="openModal('adminLogin')">Creator Panel</a>
   </nav>
 </header>
 
+<!-- Hero Section -->
 <section class="hero">
-  <img src="assets/hero.jpg" alt="Hero Image" class="hero-img">
-  <h1>Top Copywriting Jobs & Freelance Opportunities</h1>
-  <p>Join thousands of talented writers and marketers who monetize their skills. Apply now to see opportunities!</p>
-  <div id="rotatingQuote" class="quote">“The way to get started is to quit talking and begin doing.” — Walt Disney</div>
-  <button onclick="openModal('register')">Sign Up to Apply</button>
+  <h1>Empower Your Future with GE</h1>
+  <p>Find opportunities, learn from top copywriters, monetize your skills, and grow your career. Join thousands who leveled up through our platform.</p>
+  <button onclick="window.location.href='jobs.html'">Apply for Jobs</button>
+  <div class="quote" id="rotatingQuote">“The way to get started is to quit talking and begin doing.” — Walt Disney</div>
 </section>
 
-<section id="about" class="section">
-  <h2>Why GetEducate?</h2>
-  <p>We help copywriters and marketers find remote, high-paying jobs and freelance gigs. Learn from top industry experts, track your growth, and connect with brands worldwide.</p>
-</section>
-
+<!-- Benefits Section -->
 <section id="benefits" class="section">
-  <h2>Benefits</h2>
+  <h2>Why GE?</h2>
   <ul>
-    <li>💰 Monetize your skills effectively</li>
-    <li>🌎 Work remotely from anywhere</li>
-    <li>📈 Track your growth and statistics</li>
-    <li>🤝 Collaborate with top companies</li>
+    <li>💡 Access exclusive copywriting and business opportunities</li>
+    <li>📈 Track your growth, earnings, and career milestones</li>
+    <li>🌐 Join a global community of motivated creators</li>
+    <li>🎯 Get personalized guidance from experts</li>
   </ul>
 </section>
 
+<!-- Success Stories -->
 <section id="success" class="section">
   <h2>Success Stories</h2>
-  <p>Many of our members have scaled their freelance careers to six figures. Join them and take control of your career.</p>
+  <p>Thousands of users have transformed their skills into income and global recognition.</p>
+  <ul>
+    <li>“GE helped me land my first freelance client worth $5,000!” — Alex P.</li>
+    <li>“I grew my Instagram following and monetized my content thanks to GE’s insights.” — Maya R.</li>
+    <li>“The career guidance and application system made me confident to apply for top remote positions.” — John K.</li>
+  </ul>
 </section>
 
-<section id="contact" class="section">
+<!-- Contact -->
+<section class="section">
   <h2>Contact Us</h2>
   <p>Email: <a href="mailto:elmurodovshuhrat977@gmail.com">elmurodovshuhrat977@gmail.com</a></p>
   <p>Instagram: <a href="https://www.instagram.com/shukhrat.elmurodovv/" target="_blank">@shukhrat.elmurodovv</a></p>
+  <p>YouTube: <a href="https://www.youtube.com/@ShukhratElmurodov" target="_blank">ShukhratElmurodov</a></p>
+  <p>X: <a href="https://x.com/Shukhrat_E" target="_blank">@Shukhrat_E</a></p>
 </section>
 
+<!-- Footer -->
 <footer>
-  <p>&copy; 2025 GetEducate.io. All rights reserved.</p>
+  <p>© 2025 GE - GetEducation. All rights reserved.</p>
 </footer>
 
-<!-- Modal for Login/Register/Admin -->
+<!-- Modals: Login & Register -->
 <div class="modal-bg" id="modalBg">
+  <!-- Register Modal -->
   <div class="modal" id="registerModal">
     <span class="close" onclick="closeModal()">&times;</span>
     <h2>Register</h2>
@@ -70,6 +75,7 @@
     <div class="switch" onclick="toggleModal('login')">Already have an account?</div>
   </div>
 
+  <!-- Login Modal -->
   <div class="modal hidden" id="loginModal">
     <span class="close" onclick="closeModal()">&times;</span>
     <h2>Login</h2>
@@ -79,9 +85,10 @@
     <div class="switch" onclick="toggleModal('register')">Need an account?</div>
   </div>
 
+  <!-- Admin Login Modal -->
   <div class="modal hidden" id="adminLoginModal">
     <span class="close" onclick="closeModal()">&times;</span>
-    <h2>Creator Panel Login</h2>
+    <h2>Admin Login</h2>
     <input type="text" id="adminUser" placeholder="Username">
     <input type="password" id="adminPass" placeholder="Password">
     <button onclick="loginAdmin()">Enter Panel</button>
