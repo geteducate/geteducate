@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><!-- same head --><title>Full-Stack Developer - GetEducate</title><link rel="stylesheet" href="style.css"></head>
-<body>
-<header><!-- logo + nav --></header>
-<section class="section">
-  <h1>Full-Stack Developer</h1>
-  <p>Date Posted: Dec 2025 | Remote | Full Time</p>
-  <!-- Paste your FULL provided text here for Job Summary, Your Role, Ideal Candidate, etc. -->
-  <ol class="numbered"><!-- Your 001-006 list --></ol>
-  <ul><!-- You Shouldn't Apply If --></ul>
-  <button class="btn" onclick="checkLogin('application.html')">APPLY NOW</button>
-</section>
-</body></html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full-Stack Developer - GetEducate</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body onload="if(!isLoggedIn()) location.href='index.html'">
+  <header>
+    <div class="logo"><img src="logo.png" alt="GE Logo"></div>
+    <nav><!-- same as index --></nav>
+  </header>
+
+  <section class="section job-text">
+    <h1>Full-Stack Developer</h1>
+    <p>Date Posted: Dec 2025 • Remote • Full Time</p>
+
+    <h3>Job Summary</h3>
+    <p>Join Team GetEducate as a Full-Stack Developer. We build fast, global products that actually scale - and we do it with high standards. If you write <strong>clean, efficient code</strong>, <strong>move fast</strong> without breaking things, and can <strong>take full ownership</strong> of what you ship, you’ll fit right in...</p>
+    <!-- Paste the rest of your full provided text here (Your Role, Ideal Candidate, etc.) -->
+
+    <h3>What You'll Do</h3>
+    <ol class="numbered">
+      <li>Work across the full stack...</li>
+      <!-- Your 001-006 -->
+    </ol>
+
+    <h3>You Shouldn't Apply If</h3>
+    <ul>
+      <li>You want a normal 9-5...</li>
+      <!-- Your list -->
+    </ul>
+
+    <button class="btn" onclick="requireLogin('application.html')">APPLY NOW</button>
+  </section>
+</body>
+</html>
