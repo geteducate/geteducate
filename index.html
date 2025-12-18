@@ -87,3 +87,30 @@
     navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
   });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    centeredSlides: true,
+    slidesPerView: 1,
+    spaceBetween: 40,
+    autoplay: {
+      delay: 25000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      868: {
+        slidesPerView: 2,
+        spaceBetween: 50,
+      },
+    },
+  });
+</script>
