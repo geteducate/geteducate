@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Register - GetEducate</title>
+  <!-- Unicons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <!-- Boxicons for errors -->
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+  <!-- Poppins Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Background with opaque overlay */
+    body { height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(64, 112, 244, 0.9), rgba(64, 112, 244, 0.9)), url('https://img.freepik.com/free-vector/blue-gradient-abstract-background_78513-237.jpg') center/cover; }
+    /* Combined styles from your codes + tweaks */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    .container { position: relative; max-width: 430px; width: 100%; background: #fff; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); overflow: hidden; }
+    .container .forms { display: flex; align-items: center; height: 440px; width: 200%; transition: all 0.4s ease; }
+    .container .form { width: 50%; padding: 30px; transition: margin-left 0.4s ease; }
+    .container.active .forms { height: 600px; margin-left: -50%; }
+    .form .title { font-size: 27px; font-weight: 600; position: relative; }
+    .form .title::before { content: ''; position: absolute; left: 0; bottom: -5px; height: 3px; width: 30px; background: #4070f4; border-radius: 25px; }
+    .input-field { position: relative; height: 50px; width: 100%; margin-top: 30px; }
+    .input-field input { height: 100%; width: 100%; padding: 0 35px; border: none; outline: none; font-size: 16px; border-bottom: 2px solid #ccc; transition: all 0.2s ease; }
+    .input-field input:focus { border-bottom-color: #4070f4; }
+    .input-field i { position: absolute; top: 50%; transform: translateY(-50%); font-size: 23px; color: #999; transition: 0.2s; }
+    .input-field i.icon { left: 0; }
+    .input-field i.showHidePw { right: 0; cursor: pointer; }
+    .input-field input:focus ~ i { color: #4070f4; }
+    .button input { border: none; color: #fff; background: #4070f4; font-size: 17px; font-weight: 500; border-radius: 6px; cursor: pointer; }
+    .button input:hover { background: #265df2; }
+    .error { display: flex; align-items: center; margin-top: 6px; color: #d93025; font-size: 13px; display: none; }
+    .invalid .error { display: flex; }
+    .error-icon { margin-right: 6px; }
+    /* Verify step */
+    .verify-step { display: none; }
+    .container.verify-active .forms { height: 300px; }
+    .container.verify-active .verify-step { display: block; }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <div class="forms">
+      <!-- Login -->
+      <div class="form login">
+        <span class="title">Login</span>
+        <form id="loginForm">
+          <div class="input-field">
+            <input type="email" id="logEmail" placeholder="Enter your email" required>
+            <i class="uil uil-envelope icon"></i>
+          </div>
+          <div class="input-field">
+            <input type="password" class="password" id="logPass" placeholder="Enter your password" required>
+            <i class="uil uil-lock icon"></i>
+            <i class="uil uil-eye-slash showHidePw"></i>
+          </div>
+          <div class="input-field button">
+            <input type="submit" value="Login">
+          </div>
+        </form>
+        <div class="login-signup">
+          <span>Not a member? <a href="#" class="signup-link">Signup Now</a></span>
+        </div>
+      </div>
+      <!-- Signup -->
+      <div class="form signup">
+        <span class="title">Registration</span>
+        <form id="signupForm">
+          <div class="field email-field">
+            <div class="input-field">
+              <input type="email" class="email" placeholder="Enter your email" required>
+            </div>
+            <span class="error email-error"><i class='bx bx-error-circle error-icon'></i><p>Please enter a valid email</p></span>
+          </div>
+          <div class="field create-password">
+            <div class="input-field">
+              <input type="password" class="password" placeholder="Create password" required>
+              <i class="uil uil-lock icon"></i>
+              <i class="uil uil-eye-slash showHidePw"></i>
+            </div>
+            <span class="error password-error"><i class='bx bx-error-circle error-icon'></i><p>At least 8 chars with number, symbol, upper & lower</p></span>
+          </div>
+          <div class="field confirm-password">
+            <div class="input-field">
+              <input type="password" class="cPassword" placeholder="Confirm password" required>
+              <i class="uil uil-lock icon"></i>
+              <i class="uil uil-eye-slash showHidePw"></i>
+            </div>
+            <span class="error cPassword-error"><i class='bx bx-error-circle error-icon'></i><p>Passwords don't match</p></span>
+          </div>
+          <div class="input-field button">
+            <input type="submit" value="Signup">
+          </div>
+        </form>
+        <div class="login-signup">
+          <span>Already a member? <a href="#" class="login-link">Login Now</a></span>
+        </div>
+      </div>
+    </div>
+    <!-- Verify step -->
+    <div class="verify-step">
+      <span class="title">Verify Code</span>
+      <div class="input-field">
+        <input type="number" id="verifyInput" placeholder="Enter 4-digit code">
+      </div>
+      <div class="input-field button">
+        <input type="button" value="Verify" onclick="verifyCode()">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sliding toggle
+    const container = document.getElementById('container');
+    document.querySelector('.signup-link').addEventListener('click', (e) => { e.preventDefault(); container.classList.add('active'); });
+    document.querySelector('.login-link').addEventListener('click', (e) => { e.preventDefault(); container.classList.remove('active'); });
+
+    // Show/hide password
+    document.querySelectorAll('.showHidePw').forEach(icon => {
+      icon.addEventListener('click', () => {
+        const pw = icon.parentElement.querySelector('.password') || icon.parentElement.querySelector('input[type="password"]');
+        if (pw.type === 'password') {
+          pw.type = 'text';
+          icon.classList.replace('uil-eye-slash', 'uil-eye');
+        } else {
+          pw.type = 'password';
+          icon.classList.replace('uil-eye', 'uil-eye-slash');
+        }
+      });
+    });
+
+    // Validation (from your second code)
+    const signupForm = document.getElementById('signupForm');
+    const emailField = signupForm.querySelector('.email-field');
+    const emailInput = emailField.querySelector('.email');
+    const passField = signupForm.querySelector('.create-password');
+    const passInput = passField.querySelector('.password');
+    const cPassField = signupForm.querySelector('.confirm-password');
+    const cPassInput = cPassField.querySelector('.cPassword');
+
+    function checkEmail() {
+      const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!emailInput.value.match(pattern)) emailField.classList.add('invalid');
+      else emailField.classList.remove('invalid');
+    }
+    function createPass() {
+      const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passInput.value.match(pattern)) passField.classList.add('invalid');
+      else passField.classList.remove('invalid');
+    }
+    function confirmPass() {
+      if (passInput.value !== cPassInput.value || !cPassInput.value) cPassField.classList.add('invalid');
+      else cPassField.classList.remove('invalid');
+    }
+
+    emailInput.addEventListener('keyup', checkEmail);
+    passInput.addEventListener('keyup', createPass);
+    cPassInput.addEventListener('keyup', confirmPass);
+
+    // Signup submit
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      checkEmail(); createPass(); confirmPass();
+      if (!emailField.classList.contains('invalid') && !passField.classList.contains('invalid') && !cPassField.classList.contains('invalid')) {
+        // Simulate code send
+        const code = Math.floor(1000 + Math.random() * 9000);
+        localStorage.setItem('tempReg', JSON.stringify({email: emailInput.value, pass: passInput.value, code}));
+        alert(`Code sent: ${code}`);
+        container.classList.add('verify-active');
+      }
+    });
+
+    // Verify
+    function verifyCode() {
+      const input = document.getElementById('verifyInput').value;
+      const temp = JSON.parse(localStorage.getItem('tempReg'));
+      if (input == temp.code) {
+        let users = JSON.parse(localStorage.getItem('users') || '[]');
+        users.push({email: temp.email, pass: temp.pass});
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('currentUser', temp.email);
+        alert('Success! Redirecting...');
+        location.href = 'index.html';
+      } else alert('Wrong code');
+    }
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('logEmail').value;
+      const pass = document.getElementById('logPass').value;
+      let users = JSON.parse(localStorage.getItem('users') || '[]');
+      const found = users.find(u => u.email === email && u.pass === pass);
+      if (found) {
+        localStorage.setItem('currentUser', email);
+        alert('Logged in!');
+        location.href = 'index.html';
+      } else alert('Wrong credentials');
+    });
+  </script>
+</body>
+</html>
