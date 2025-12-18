@@ -1,76 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GetEducate</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <div class="logo"><img src="logo.png" alt="GE Logo"></div>
-    <nav>
-      <a onclick="requireLogin('index.html')">Home</a>
-      <a onclick="requireLogin('jobs.html')">Careers</a>
-      <a id="authLink" onclick="isLoggedIn() ? logout() : openModal('login')">${isLoggedIn() ? 'Logout' : 'Login/Register'}</a>
-    </nav>
-  </header>
+<!-- Add in <head> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
-  <div id="modalBg" class="modal-bg" onclick="closeModal()">
-    <div class="modal" onclick="event.stopPropagation()">
-      <div id="loginModal" class="modal-content">
-        <h2>Login</h2>
-        <input id="logEmail" type="email" placeholder="Email" required>
-        <input id="logPass" type="password" placeholder="Password" required>
-        <button class="btn" onclick="login()">Login</button>
+<!-- In body, replace success stories section with this carousel -->
+<section class="section">
+  <h2>Success Stories From Our Members 🌟</h2>
+  <div class="testimonial mySwiper container">
+    <div class="testi-content swiper-wrapper">
+      <!-- 10 stories -->
+      <div class="slide swiper-slide">
+        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="" class="image">
+        <p>“GetEducate helped me land my first $5k copywriting client – game changer!”</p>
+        <i class='bx bxs-quote-alt-left quote-icon'></i>
+        <div class="details">
+          <span class="name">Alex Johnson, 24</span>
+          <span class="job">Freelance Copywriter</span>
+        </div>
       </div>
-      <div id="registerModal" class="modal-content hidden">
-        <h2>Register</h2>
-        <input id="regEmail" type="email" placeholder="Email" required>
-        <input id="regPass" type="password" placeholder="Password" required>
-        <button class="btn" onclick="register()">Register</button>
+      <!-- Repeat 9 more with different pics/names/stories (use randomuser.me for pics) -->
+      <div class="slide swiper-slide">
+        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="" class="image">
+        <p>“From zero to $10k/month agency thanks to the skills here.”</p>
+        <i class='bx bxs-quote-alt-left quote-icon'></i>
+        <div class="details">
+          <span class="name">Maya Smith, 28</span>
+          <span class="job">Agency Owner</span>
+        </div>
       </div>
-      <div id="verifyModal" class="modal-content hidden">
-        <h2>Verify Code</h2>
-        <input id="verifyInput" type="number" placeholder="4-digit code">
-        <button class="btn" onclick="verifyCode()">Verify</button>
-      </div>
+      <!-- Add 8 more similar... -->
     </div>
+    <div class="swiper-button-next nav-btn"></div>
+    <div class="swiper-button-prev nav-btn"></div>
+    <div class="swiper-pagination"></div>
   </div>
+</section>
 
-  <section class="section">
-    <h1>GetEducate – Empowering Digital Creators</h1>
-    <p id="quote" class="quote active"></p>
-    <img src="https://img.freepik.com/free-vector/online-learning-isometric-concept_1284-21807.jpg" alt="Online education" class="hero-img">
+<!-- Big Apply button (replace old one) -->
+<button class="btn" style="font-size: 24px; padding: 24px 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" onclick="location.href='auth.html'">Apply for Exclusive Opportunities 🚀</button>
 
-    <h2>Why We Started GetEducate</h2>
-    <p>To revolutionize education with practical copywriting, sales, and business skills that lead to real income.</p>
-
-    <h2>Created By</h2>
-    <p>Shukhrat Elmurodov – @shukhrat.elmurodovv (IG), @ShukhratElmurodov (YT), @Shukhrat_E (X)</p>
-
-    <h2>Functions & Benefits</h2>
-    <ul>
-      <li>Exclusive remote opportunities & gigs</li>
-      <li>Track growth, earnings, milestones</li>
-      <li>Personalized mentorship from experts</li>
-      <li>Join motivated global community</li>
-      <li>Turn skills into high-income streams</li>
-    </ul>
-
-    <h2>Success Stories</h2>
-    <img src="https://img.freepik.com/free-vector/business-team-celebrating-success_74855-7587.jpg" alt="Success" class="hero-img">
-    <ul>
-      <li>“Landed $10k/month clients!” – Member</li>
-      <li>“Built agency from zero” – Member</li>
-    </ul>
-
-    <h2>Contact</h2>
-    <p>elmurodovshuhrat977@gmail.com<br>Follow on IG/YT/X</p>
-
-    <button class="btn" onclick="requireLogin('jobs.html')">Apply for Jobs</button>
-  </section>
-
-  <script src="script.js"></script>
-</body>
-</html>
+<!-- At end of body -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: { delay: 25000, disableOnInteraction: false },
+    pagination: { el: ".swiper-pagination", clickable: true },
+    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+  });
+</script>
