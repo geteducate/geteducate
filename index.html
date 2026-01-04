@@ -1,116 +1,357 @@
-<!-- Add in <head> -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GetEducate - Unlock Your Earning Potential</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+  <header id="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <span>GetEducate</span>
+      </a>
 
-<!-- In body, replace success stories section with this carousel -->
-<section class="section">
-  <h2>Success Stories From Our Members 🌟</h2>
-  <div class="testimonial mySwiper container">
-    <div class="testi-content swiper-wrapper">
-      <!-- 10 stories -->
-      <div class="slide swiper-slide">
-        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="" class="image">
-        <p>“GetEducate helped me land my first $5k copywriting client – game changer!”</p>
-        <i class='bx bxs-quote-alt-left quote-icon'></i>
-        <div class="details">
-          <span class="name">Alex Johnson, 24</span>
-          <span class="job">Freelance Copywriter</span>
+      <button class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav id="mainNav">
+        <a href="#features">Features</a>
+        <a href="#opportunities">Opportunities</a>
+        <a href="#testimonials">Success Stories</a>
+        <a href="#about">About</a>
+        <div class="header-buttons">
+          <a href="auth.html" class="btn btn-ghost">Login</a>
+          <a href="auth.html" class="btn btn-primary">Get Started</a>
         </div>
-      </div>
-      <!-- Repeat 9 more with different pics/names/stories (use randomuser.me for pics) -->
-      <div class="slide swiper-slide">
-        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="" class="image">
-        <p>“From zero to $10k/month agency thanks to the skills here.”</p>
-        <i class='bx bxs-quote-alt-left quote-icon'></i>
-        <div class="details">
-          <span class="name">Maya Smith, 28</span>
-          <span class="job">Agency Owner</span>
-        </div>
-      </div>
-      <!-- Add 8 more similar... -->
+      </nav>
     </div>
-    <div class="swiper-button-next nav-btn"></div>
-    <div class="swiper-button-prev nav-btn"></div>
-    <div class="swiper-pagination"></div>
-  </div>
-</section>
-<section class="testimonial-section">
-  <h2>Success Stories From Our Members</h2>
-  <div class="mySwiper">
-    <div class="swiper-wrapper">
-      <!-- Example slide -->
-      <div class="swiper-slide">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Member" class="testimonial-image">
-        <div class="testimonial-content">
-          <i class='bx bxs-quote-alt-left quote-icon'></i>
-          <p>“GetEducate transformed my career. I went from zero clients to earning $8k/month in copywriting within 6 months. The mentorship and opportunities are real.”</p>
-          <div class="testimonial-details">
-            <span class="name">Alex Johnson</span><br>
-            <span class="job">24 • Freelance Copywriter</span>
+  </header>
+
+  <section class="section-hero">
+    <div class="hero-content">
+      <div class="hero-badge">Transform Your Future Today</div>
+      <h1 class="hero-title">Unlock Your Earning Potential with High-Income Skills</h1>
+      <p class="hero-subtitle">Join thousands of members who've turned their ambitions into reality through expert-led training, exclusive opportunities, and a thriving community.</p>
+      <div class="hero-cta">
+        <a href="auth.html" class="btn btn-primary btn-large">Start Your Journey</a>
+        <a href="#features" class="btn btn-secondary btn-large">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-section">
+    <div class="quote-container">
+      <p id="quote" class="quote-text active">"On the average, five times as many people read the headline as read the body copy. When you have written your headline, you have spent eighty cents out of your dollar." — David Ogilvy</p>
+    </div>
+  </section>
+
+  <section id="features" class="section features-section">
+    <div class="container">
+      <h2 class="text-center">Why Choose GetEducate?</h2>
+      <p class="text-center" style="max-width: 700px; margin: 0 auto;">We provide everything you need to master high-income skills and land exclusive opportunities that accelerate your career growth.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class='bx bx-book-open'></i>
+          </div>
+          <h3>Expert Training</h3>
+          <p>Learn from industry leaders with proven track records. Get access to comprehensive courses in copywriting, development, design, and more.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class='bx bx-briefcase'></i>
+          </div>
+          <h3>Exclusive Opportunities</h3>
+          <p>Access high-paying jobs and projects that aren't available anywhere else. We connect you directly with companies looking for talent.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class='bx bx-group'></i>
+          </div>
+          <h3>Thriving Community</h3>
+          <p>Network with ambitious professionals, get mentorship, and collaborate on projects. Success is easier when you're not alone.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class='bx bx-trending-up'></i>
+          </div>
+          <h3>Proven Results</h3>
+          <p>Our members have gone from zero to six-figure incomes. Follow the same blueprint that has worked for thousands before you.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class='bx bx-support'></i>
+          </div>
+          <h3>24/7 Support</h3>
+          <p>Get help whenever you need it. Our community and support team are always available to answer questions and provide guidance.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class='bx bx-trophy'></i>
+          </div>
+          <h3>Real-World Projects</h3>
+          <p>Build your portfolio with actual client work. Gain experience and testimonials that will set you apart from the competition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="opportunities" class="section">
+    <div class="container">
+      <h2 class="text-center">Exclusive Opportunities Waiting for You</h2>
+      <p class="text-center" style="max-width: 700px; margin: 0 auto var(--spacing-2xl);">Members get first access to carefully curated opportunities from top companies and startups.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Full-Stack Developer</h3>
+          <p><strong>Remote • Full Time</strong></p>
+          <p>Build scalable products with modern tech stack. Competitive salary and equity package.</p>
+          <a href="jobs.html" class="btn btn-primary" style="margin-top: 16px;">View Details</a>
+        </div>
+
+        <div class="feature-card">
+          <h3>Senior Copywriter</h3>
+          <p><strong>Remote • Freelance</strong></p>
+          <p>Craft compelling copy for high-growth startups. $5k-$15k per project.</p>
+          <a href="auth.html" class="btn btn-primary" style="margin-top: 16px;">Apply Now</a>
+        </div>
+
+        <div class="feature-card">
+          <h3>Product Designer</h3>
+          <p><strong>Remote • Contract</strong></p>
+          <p>Design beautiful user experiences for SaaS products. Ongoing work available.</p>
+          <a href="auth.html" class="btn btn-primary" style="margin-top: 16px;">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="testimonial-section">
+    <h2>Success Stories From Our Members</h2>
+    <div class="mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Member" class="testimonial-image">
+          <div class="testimonial-content">
+            <i class='bx bxs-quote-alt-left quote-icon'></i>
+            <p>"GetEducate transformed my career. I went from zero clients to earning $8k/month in copywriting within 6 months. The mentorship and opportunities are real."</p>
+            <div class="testimonial-details">
+              <span class="name">Alex Johnson</span>
+              <span class="job">24 • Freelance Copywriter</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Member" class="testimonial-image">
+          <div class="testimonial-content">
+            <i class='bx bxs-quote-alt-left quote-icon'></i>
+            <p>"Best decision ever. The practical skills and community helped me build a 6-figure agency in under a year. Completely changed my life."</p>
+            <div class="testimonial-details">
+              <span class="name">Sophia Chen</span>
+              <span class="job">29 • Agency Owner</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Member" class="testimonial-image">
+          <div class="testimonial-content">
+            <i class='bx bxs-quote-alt-left quote-icon'></i>
+            <p>"I landed my dream job as a full-stack developer through GetEducate. The training was world-class and the job opportunities were exactly what I needed."</p>
+            <div class="testimonial-details">
+              <span class="name">Marcus Rodriguez</span>
+              <span class="job">26 • Full-Stack Developer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Member" class="testimonial-image">
+          <div class="testimonial-content">
+            <i class='bx bxs-quote-alt-left quote-icon'></i>
+            <p>"From struggling freelancer to $12k/month designer. GetEducate gave me the skills, confidence, and clients I needed to succeed."</p>
+            <div class="testimonial-details">
+              <span class="name">Emma Thompson</span>
+              <span class="job">31 • Product Designer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <img src="https://randomuser.me/api/portraits/men/43.jpg" alt="Member" class="testimonial-image">
+          <div class="testimonial-content">
+            <i class='bx bxs-quote-alt-left quote-icon'></i>
+            <p>"The ROI is insane. I made back my investment in the first month and now I'm earning more than I ever thought possible. Thank you GetEducate!"</p>
+            <div class="testimonial-details">
+              <span class="name">David Park</span>
+              <span class="job">28 • Marketing Consultant</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <img src="https://randomuser.me/api/portraits/women/47.jpg" alt="Member" class="testimonial-image">
+          <div class="testimonial-content">
+            <i class='bx bxs-quote-alt-left quote-icon'></i>
+            <p>"I quit my 9-5 after 3 months thanks to the skills I learned here. Now I work from anywhere and make double what I used to earn."</p>
+            <div class="testimonial-details">
+              <span class="name">Jessica Lee</span>
+              <span class="job">27 • Content Strategist</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Member" class="testimonial-image">
+          <div class="testimonial-content">
+            <i class='bx bxs-quote-alt-left quote-icon'></i>
+            <p>"The community alone is worth it. But add the training and job opportunities? It's a no-brainer. Changed my trajectory completely."</p>
+            <div class="testimonial-details">
+              <span class="name">Ryan Mitchell</span>
+              <span class="job">25 • Brand Strategist</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Member" class="testimonial-image">
+          <div class="testimonial-content">
+            <i class='bx bxs-quote-alt-left quote-icon'></i>
+            <p>"From unemployed to employed at a top startup in 4 months. The practical approach and real opportunities made all the difference."</p>
+            <div class="testimonial-details">
+              <span class="name">Olivia Martinez</span>
+              <span class="job">23 • UI/UX Designer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <img src="https://randomuser.me/api/portraits/men/71.jpg" alt="Member" class="testimonial-image">
+          <div class="testimonial-content">
+            <i class='bx bxs-quote-alt-left quote-icon'></i>
+            <p>"I was skeptical at first, but the results speak for themselves. Built a profitable business in 8 months with the skills I learned here."</p>
+            <div class="testimonial-details">
+              <span class="name">James Anderson</span>
+              <span class="job">30 • E-commerce Consultant</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <img src="https://randomuser.me/api/portraits/women/89.jpg" alt="Member" class="testimonial-image">
+          <div class="testimonial-content">
+            <i class='bx bxs-quote-alt-left quote-icon'></i>
+            <p>"GetEducate gave me the confidence to charge what I'm worth. Now I work with amazing clients and love what I do every single day."</p>
+            <div class="testimonial-details">
+              <span class="name">Sarah Williams</span>
+              <span class="job">32 • Brand Consultant</span>
+            </div>
           </div>
         </div>
       </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
 
-      <!-- Add 9 more slides with different randomuser.me portraits and stories praising GetEducate/skills/income -->
-      <!-- Example 2 -->
-      <div class="swiper-slide">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Member" class="testimonial-image">
-        <div class="testimonial-content">
-          <i class='bx bxs-quote-alt-left quote-icon'></i>
-          <p>“Best decision ever. The practical skills and community helped me build a 6-figure agency.”</p>
-          <div class="testimonial-details">
-            <span class="name">Sophia Chen</span><br>
-            <span class="job">29 • Agency Owner</span>
-          </div>
-        </div>
+  <div class="cta-section">
+    <h2>Ready to Transform Your Career?</h2>
+    <p>Join thousands of members who are building the skills and careers they've always dreamed of. Your future starts today.</p>
+    <a href="auth.html" class="btn btn-primary btn-large">Apply for Exclusive Access</a>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>GetEducate</h4>
+        <p style="color: var(--gray-400); margin-bottom: 16px;">Empowering individuals to unlock their earning potential through high-income skills.</p>
       </div>
 
-      <!-- ... continue for 10 total -->
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
-  </div>
-</section>
-<!-- Big Apply button (replace old one) -->
-<button class="btn" style="font-size: 24px; padding: 24px 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" onclick="location.href='auth.html'">Apply for Exclusive Opportunities 🚀</button>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <a href="#features">Features</a>
+        <a href="#opportunities">Opportunities</a>
+        <a href="#testimonials">Success Stories</a>
+        <a href="auth.html">Get Started</a>
+      </div>
 
-<!-- At end of body -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-  var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    loop: true,
-    autoplay: { delay: 25000, disableOnInteraction: false },
-    pagination: { el: ".swiper-pagination", clickable: true },
-    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-  });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-  const swiper = new Swiper('.mySwiper', {
-    loop: true,
-    centeredSlides: true,
-    slidesPerView: 1,
-    spaceBetween: 40,
-    autoplay: {
-      delay: 25000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      868: {
-        slidesPerView: 2,
-        spaceBetween: 50,
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="#">Blog</a>
+        <a href="#">Community</a>
+        <a href="#">Help Center</a>
+        <a href="#">Contact Us</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 GetEducate. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const swiper = new Swiper('.mySwiper', {
+      loop: true,
+      centeredSlides: true,
+      slidesPerView: 1,
+      spaceBetween: 40,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
       },
-    },
-  });
-</script>
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        868: {
+          slidesPerView: 2,
+          spaceBetween: 50,
+        },
+      },
+    });
+
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    function toggleMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,120 +1,174 @@
-// Real quotes from famous copywriters/books
 const quotes = [
-  "“On the average, five times as many people read the headline as read the body copy. When you have written your headline, you have spent eighty cents out of your dollar.” — David Ogilvy",
-  "“The consumer isn't a moron; she is your wife.” — David Ogilvy",
-  "“If it doesn't sell, it isn't creative.” — David Ogilvy",
-  "“Nobody reads ads. People read what interests them. Sometimes it's an ad.” — Howard Gossage",
-  "“Make it simple. Make it memorable. Make it inviting to look at.” — Leo Burnett",
-  "“Creative without strategy is called art. Creative with strategy is called advertising.” — Jef Richards"
+  ""On the average, five times as many people read the headline as read the body copy. When you have written your headline, you have spent eighty cents out of your dollar." — David Ogilvy",
+  ""The consumer isn't a moron; she is your wife." — David Ogilvy",
+  ""If it doesn't sell, it isn't creative." — David Ogilvy",
+  ""Nobody reads ads. People read what interests them. Sometimes it's an ad." — Howard Gossage",
+  ""Make it simple. Make it memorable. Make it inviting to look at." — Leo Burnett",
+  ""Creative without strategy is called art. Creative with strategy is called advertising." — Jef Richards"
 ];
-let qIndex = 0;
+
+let quoteIndex = 0;
+
 function rotateQuote() {
   const quoteEl = document.getElementById('quote');
   if (!quoteEl) return;
+
   quoteEl.classList.remove('active');
+
   setTimeout(() => {
-    quoteEl.innerText = quotes[qIndex];
+    quoteEl.innerText = quotes[quoteIndex];
     quoteEl.classList.add('active');
-    qIndex = (qIndex + 1) % quotes.length;
+    quoteIndex = (quoteIndex + 1) % quotes.length;
   }, 1000);
 }
-setInterval(rotateQuote, 10000);
-if (document.getElementById('quote')) rotateQuote();
 
-// Modals
-function openModal(type) {
-  document.getElementById('modalBg').style.display = 'flex';
-  document.querySelectorAll('.modal-content').forEach(m => m.classList.add('hidden'));
-  document.getElementById(type + 'Modal').classList.remove('hidden');
-}
-function closeModal() {
-  document.getElementById('modalBg').style.display = 'none';
+if (document.getElementById('quote')) {
+  setInterval(rotateQuote, 10000);
 }
 
-// Auth
-function register() {
-  const email = document.getElementById('regEmail').value.trim();
-  const pass = document.getElementById('regPass').value;
-  if (!email || !pass) return alert('Fill all fields');
-  let users = JSON.parse(localStorage.getItem('users') || '[]');
-  if (users.find(u => u.email === email)) return alert('Email exists');
-  const code = Math.floor(1000 + Math.random() * 9000);
-  localStorage.setItem('tempReg', JSON.stringify({email, pass, code}));
-  alert(`Code sent to ${email}: ${code} (demo - enter it)`);
-  openModal('verify');
+function toggleMenu() {
+  const nav = document.getElementById('mainNav');
+  if (nav) {
+    nav.classList.toggle('active');
+  }
 }
-function verifyCode() {
-  const input = document.getElementById('verifyInput').value;
-  const temp = JSON.parse(localStorage.getItem('tempReg'));
-  if (input == temp.code) {
-    let users = JSON.parse(localStorage.getItem('users') || '[]');
-    users.push({email: temp.email, pass: temp.pass});
-    localStorage.setItem('users', JSON.stringify(users));
-    localStorage.setItem('currentUser', temp.email);
-    alert('Registered & logged in!');
-    closeModal();
-    localStorage.removeItem('tempReg');
-  } else alert('Wrong code');
-}
-function login() {
-  const email = document.getElementById('logEmail').value.trim();
-  const pass = document.getElementById('logPass').value;
-  let users = JSON.parse(localStorage.getItem('users') || '[]');
-  const found = users.find(u => u.email === email && u.pass === pass);
-  if (found) {
-    localStorage.setItem('currentUser', email);
-    alert('Logged in!');
-    closeModal();
-    location.reload();
-  } else alert('Wrong credentials');
-}
-function logout() {
-  localStorage.removeItem('currentUser');
-  location.reload();
-}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href');
+      if (targetId === '#') return;
+
+      const targetSection = document.querySelector(targetId);
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+
+        const nav = document.getElementById('mainNav');
+        if (nav && nav.classList.contains('active')) {
+          nav.classList.remove('active');
+        }
+      }
+    });
+  });
+});
+
 function isLoggedIn() {
   return !!localStorage.getItem('currentUser');
 }
-function requireLogin(page) {
-  if (!isLoggedIn()) { openModal('login'); return; }
-  location.href = page;
+
+function logout() {
+  localStorage.removeItem('currentUser');
+  location.href = 'index.html';
 }
 
-// Application steps
+function requireLogin(page) {
+  if (!isLoggedIn()) {
+    alert('Please login first');
+    location.href = 'auth.html';
+    return false;
+  }
+  location.href = page;
+  return true;
+}
+
 let appStep = 0;
 let appData = {};
-const appSteps = document.querySelectorAll('.app-step');
+
+function initializeApplication() {
+  const appSteps = document.querySelectorAll('.app-step');
+  if (appSteps.length > 0) {
+    showAppStep();
+  }
+}
+
 function showAppStep() {
-  appSteps.forEach(s => s.classList.remove('active'));
-  appSteps[appStep].classList.add('active');
-  // Dynamic inserts
-  if (appData.name) document.querySelectorAll('.dynamic-name').forEach(el => el.innerText = appData.name);
-  if (appData.age) document.querySelectorAll('.dynamic-age').forEach(el => el.innerText = appData.age);
+  const appSteps = document.querySelectorAll('.app-step');
+  appSteps.forEach(step => step.classList.remove('active'));
+
+  if (appSteps[appStep]) {
+    appSteps[appStep].classList.add('active');
+  }
+
+  if (appData.name) {
+    document.querySelectorAll('.dynamic-name').forEach(el => el.innerText = appData.name);
+  }
+  if (appData.age) {
+    document.querySelectorAll('.dynamic-age').forEach(el => el.innerText = appData.age);
+  }
 }
+
 function nextApp() {
-  // Validation example (add more as needed)
+  const appSteps = document.querySelectorAll('.app-step');
   const current = appSteps[appStep];
+
   const inputs = current.querySelectorAll('input[required], textarea[required]');
-  for (let i of inputs) if (!i.value.trim()) return alert('Fill all fields');
-  // Save data
-  if (appStep === 1) { // personal info
-    appData.name = current.querySelector('#firstName').value + ' ' + current.querySelector('#lastName').value;
-    appData.age = current.querySelector('#age').value;
+  for (let input of inputs) {
+    if (!input.value.trim()) {
+      alert('Please fill all required fields');
+      return;
+    }
   }
-  // Branching
-  if (appStep === 9 && current.querySelector('input[name="fullstackExp"]:checked').value === 'no') {
-    appStep += 1; // skip to other exp
+
+  const radios = current.querySelectorAll('input[type="radio"][required]');
+  if (radios.length > 0) {
+    const radioNames = [...new Set([...radios].map(r => r.name))];
+    for (let name of radioNames) {
+      const checked = current.querySelector(`input[name="${name}"]:checked`);
+      if (!checked) {
+        alert('Please select an option');
+        return;
+      }
+    }
   }
+
+  if (appStep === 1) {
+    const firstName = current.querySelector('#firstName');
+    const lastName = current.querySelector('#lastName');
+    const age = current.querySelector('#age');
+
+    if (firstName && lastName) {
+      appData.name = `${firstName.value} ${lastName.value}`;
+    }
+    if (age) {
+      appData.age = age.value;
+    }
+  }
+
   appStep++;
+  if (appStep >= appSteps.length) {
+    submitApplication();
+    return;
+  }
+
   showAppStep();
 }
+
 function backApp() {
-  appStep--;
-  showAppStep();
+  if (appStep > 0) {
+    appStep--;
+    showAppStep();
+  }
 }
+
 function submitApplication() {
-  // Save to localStorage or simulate
-  alert('Application submitted!');
+  const timestamp = new Date().toISOString();
+  const applicationData = {
+    ...appData,
+    timestamp,
+    status: 'pending'
+  };
+
+  localStorage.setItem('lastApplication', JSON.stringify(applicationData));
+
+  alert('Application submitted successfully!');
   location.href = 'success.html';
 }
-if (appSteps.length) showAppStep();
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApplication);
+} else {
+  initializeApplication();
+}
