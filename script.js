@@ -33,7 +33,32 @@ function toggleMenu() {
   }
 }
 
+function updateHeaderAuth() {
+  const headerButtons = document.getElementById('headerButtons');
+  if (!headerButtons) return;
+
+  const username = localStorage.getItem('currentUsername');
+  const email = localStorage.getItem('currentUser');
+
+  if (username || email) {
+    const displayName = username || email;
+    headerButtons.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="color: var(--gray-700); font-weight: 500;">Welcome, <strong>${displayName}</strong></span>
+        <button onclick="logout()" class="btn btn-ghost" style="padding: 10px 20px;">Logout</button>
+      </div>
+    `;
+  } else {
+    headerButtons.innerHTML = `
+      <a href="auth.html" class="btn btn-ghost">Login</a>
+      <a href="auth.html" class="btn btn-primary">Get Started</a>
+    `;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  updateHeaderAuth();
+
   const navLinks = document.querySelectorAll('nav a[href^="#"]');
 
   navLinks.forEach(link => {
@@ -61,6 +86,7 @@ function isLoggedIn() {
 
 function logout() {
   localStorage.removeItem('currentUser');
+  localStorage.removeItem('currentUsername');
   location.href = 'index.html';
 }
 

@@ -296,6 +296,17 @@
       <div class="auth-form">
         <h2 class="auth-title">Create Account</h2>
         <form id="signupForm">
+          <div class="input-group field username-field">
+            <div class="input-wrapper">
+              <input type="text" class="username-input" placeholder="Choose a username" required>
+              <i class="uil uil-user icon"></i>
+            </div>
+            <span class="error-message">
+              <i class='bx bx-error-circle'></i>
+              Username must be 3-20 characters, alphanumeric only
+            </span>
+          </div>
+
           <div class="input-group field email-field">
             <div class="input-wrapper">
               <input type="email" class="email-input" placeholder="Enter your email" required>
@@ -375,12 +386,24 @@
     });
 
     const signupForm = document.getElementById('signupForm');
+    const usernameField = signupForm.querySelector('.username-field');
+    const usernameInput = usernameField.querySelector('.username-input');
     const emailField = signupForm.querySelector('.email-field');
     const emailInput = emailField.querySelector('.email-input');
     const passField = signupForm.querySelector('.password-field');
     const passInput = passField.querySelector('.password-input');
     const cPassField = signupForm.querySelector('.confirm-password-field');
     const cPassInput = cPassField.querySelector('.confirm-password-input');
+
+    function checkUsername() {
+      const pattern = /^[a-zA-Z0-9_]{3,20}$/;
+      if (!usernameInput.value.match(pattern)) {
+        usernameField.classList.add('invalid');
+        return false;
+      }
+      usernameField.classList.remove('invalid');
+      return true;
+    }
 
     function checkEmail() {
       const pattern = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
@@ -411,6 +434,7 @@
       return true;
     }
 
+    usernameInput.addEventListener('keyup', checkUsername);
     emailInput.addEventListener('keyup', checkEmail);
     passInput.addEventListener('keyup', checkPassword);
     cPassInput.addEventListener('keyup', checkConfirmPassword);
@@ -418,13 +442,15 @@
     signupForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
+      const usernameValid = checkUsername();
       const emailValid = checkEmail();
       const passwordValid = checkPassword();
       const confirmValid = checkConfirmPassword();
 
-      if (emailValid && passwordValid && confirmValid) {
+      if (usernameValid && emailValid && passwordValid && confirmValid) {
         const code = Math.floor(1000 + Math.random() * 9000);
         localStorage.setItem('tempReg', JSON.stringify({
+          username: usernameInput.value,
           email: emailInput.value,
           pass: passInput.value,
           code: code
@@ -446,6 +472,7 @@
 
       if (user) {
         localStorage.setItem('currentUser', email);
+        localStorage.setItem('currentUsername', user.username);
         alert('Successfully logged in!');
         location.href = 'index.html';
       } else {
@@ -465,9 +492,10 @@
 
       if (input == temp.code) {
         let users = JSON.parse(localStorage.getItem('users') || '[]');
-        users.push({ email: temp.email, pass: temp.pass });
+        users.push({ username: temp.username, email: temp.email, pass: temp.pass });
         localStorage.setItem('users', JSON.stringify(users));
         localStorage.setItem('currentUser', temp.email);
+        localStorage.setItem('currentUsername', temp.username);
         localStorage.removeItem('tempReg');
 
         alert('Account created successfully!');

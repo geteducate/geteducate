@@ -1,8 +1,8 @@
 /* ===== MODERN DESIGN SYSTEM ===== */
 :root {
-  --primary: #2563eb;
-  --primary-dark: #1e40af;
-  --primary-light: #3b82f6;
+  --primary: #0284c7;
+  --primary-dark: #0369a1;
+  --primary-light: #06b6d4;
   --secondary: #0f172a;
   --accent: #10b981;
   --success: #22c55e;
@@ -649,6 +649,12 @@ footer {
 .footer-section a:hover {
   color: var(--primary-light);
   padding-left: var(--spacing-xs);
+}
+
+.social-link:hover {
+  background: rgba(2, 132, 199, 0.2) !important;
+  color: var(--primary-light) !important;
+  transform: translateY(-4px);
 }
 
 .footer-bottom {
