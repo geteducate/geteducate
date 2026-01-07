@@ -1,10 +1,14 @@
 const quotes = [
-  ""On the average, five times as many people read the headline as read the body copy. When you have written your headline, you have spent eighty cents out of your dollar." — David Ogilvy",
-  ""The consumer isn't a moron; she is your wife." — David Ogilvy",
-  ""If it doesn't sell, it isn't creative." — David Ogilvy",
-  ""Nobody reads ads. People read what interests them. Sometimes it's an ad." — Howard Gossage",
-  ""Make it simple. Make it memorable. Make it inviting to look at." — Leo Burnett",
-  ""Creative without strategy is called art. Creative with strategy is called advertising." — Jef Richards"
+  { text: "The only way to do great work is to love what you do.", author: "Steve Jobs", category: "Work" },
+  { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill", category: "Success" },
+  { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson", category: "Business" },
+  { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt", category: "Life" },
+  { text: "It is during our darkest moments that we must focus to see the light.", author: "Aristotle", category: "Life" },
+  { text: "The way to get started is to quit talking and begin doing.", author: "Walt Disney", category: "Work" },
+  { text: "Don't let yesterday take up too much of today.", author: "Will Rogers", category: "Life" },
+  { text: "You learn more from failure than from success.", author: "Unknown", category: "Business" },
+  { text: "It's not whether you get knocked down, it's whether you get up.", author: "Vince Lombardi", category: "Success" },
+  { text: "The only impossible journey is the one you never begin.", author: "Tony Robbins", category: "Work" }
 ];
 
 let quoteIndex = 0;
@@ -16,14 +20,16 @@ function rotateQuote() {
   quoteEl.classList.remove('active');
 
   setTimeout(() => {
-    quoteEl.innerText = quotes[quoteIndex];
+    const currentQuote = quotes[quoteIndex];
+    quoteEl.innerHTML = `"${currentQuote.text}"<br><br><small style="font-size: 0.9rem; opacity: 0.8;">— ${currentQuote.author} <span style="opacity: 0.6;">[${currentQuote.category}]</span></small>`;
     quoteEl.classList.add('active');
     quoteIndex = (quoteIndex + 1) % quotes.length;
   }, 1000);
 }
 
 if (document.getElementById('quote')) {
-  setInterval(rotateQuote, 10000);
+  setInterval(rotateQuote, 300000);
+  rotateQuote();
 }
 
 function toggleMenu() {
