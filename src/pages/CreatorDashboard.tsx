@@ -8,9 +8,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { 
   Users, FileText, TrendingUp, BarChart3, 
-  LogOut, RefreshCw, Eye, Calendar, Mail, Phone 
+  LogOut, RefreshCw, Eye, Calendar, Mail, Phone, Loader2 
 } from "lucide-react";
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
+import logoImage from "@/assets/geteducate-logo.png";
 
 interface Application {
   id: string;
@@ -52,35 +53,59 @@ const CreatorDashboard = () => {
   const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
 
   useEffect(() => {
-    // Check creator authentication
-    const isAuthenticated = sessionStorage.getItem("creator_authenticated");
-    if (!isAuthenticated) {
-      navigate("/creators");
-      return;
-    }
+    // Check authentication and role
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session?.user) {
+        navigate("/creators", { replace: true });
+        return;
+      }
 
-    fetchData();
+      // Check if user has creator or admin role
+      const { data: hasCreator } = await supabase.rpc("has_role", {
+        _user_id: session.user.id,
+        _role: "creator",
+      });
+      const { data: hasAdmin } = await supabase.rpc("has_role", {
+        _user_id: session.user.id,
+        _role: "admin",
+      });
+
+      if (!hasCreator && !hasAdmin) {
+        navigate("/creators", { replace: true });
+        return;
+      }
+
+      fetchData();
+    };
+
+    checkAuth();
   }, [navigate]);
 
   const fetchData = async () => {
     setLoading(true);
     
     // Fetch applications with job category info
-    const { data: appsData } = await supabase
+    const { data: appsData, error: appsError } = await supabase
       .from("applications")
       .select("*, job_categories(title)")
       .order("created_at", { ascending: false });
 
     // Fetch profiles
-    const { data: profilesData } = await supabase
+    const { data: profilesData, error: profilesError } = await supabase
       .from("profiles")
       .select("*")
       .order("created_at", { ascending: false });
 
     // Fetch job categories
-    const { data: jobsData } = await supabase
+    const { data: jobsData, error: jobsError } = await supabase
       .from("job_categories")
       .select("*");
+
+    console.log("Applications fetched:", appsData, appsError);
+    console.log("Profiles fetched:", profilesData, profilesError);
+    console.log("Job categories fetched:", jobsData, jobsError);
 
     if (appsData) setApplications(appsData);
     if (profilesData) setProfiles(profilesData);
@@ -89,8 +114,8 @@ const CreatorDashboard = () => {
     setLoading(false);
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("creator_authenticated");
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     navigate("/creators");
   };
 
@@ -122,7 +147,10 @@ const CreatorDashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <RefreshCw className="w-8 h-8 animate-spin text-primary" />
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <p className="text-muted-foreground">Loading dashboard...</p>
+        </div>
       </div>
     );
   }
@@ -133,8 +161,12 @@ const CreatorDashboard = () => {
       <header className="bg-card border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl gradient-accent flex items-center justify-center">
-              <BarChart3 className="w-5 h-5 text-accent-foreground" />
+            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center overflow-hidden">
+              <img 
+                src={logoImage} 
+                alt="GetEducate Logo" 
+                className="w-8 h-8 object-contain"
+              />
             </div>
             <div>
               <h1 className="font-display font-bold text-xl">Creator Dashboard</h1>
@@ -182,7 +214,7 @@ const CreatorDashboard = () => {
           <Card className="shadow-card hover:shadow-glow transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">Pending Review</CardTitle>
-              <TrendingUp className="w-5 h-5 text-accent" />
+              <TrendingUp className="w-5 h-5 text-accent-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold">
@@ -290,8 +322,8 @@ const CreatorDashboard = () => {
         {/* Tabs for Applications and Users */}
         <Tabs defaultValue="applications" className="space-y-6">
           <TabsList className="grid w-full max-w-md grid-cols-2">
-            <TabsTrigger value="applications">Applications</TabsTrigger>
-            <TabsTrigger value="users">Registered Users</TabsTrigger>
+            <TabsTrigger value="applications">Applications ({applications.length})</TabsTrigger>
+            <TabsTrigger value="users">Registered Users ({profiles.length})</TabsTrigger>
           </TabsList>
 
           <TabsContent value="applications">
@@ -301,7 +333,11 @@ const CreatorDashboard = () => {
               </CardHeader>
               <CardContent>
                 {applications.length === 0 ? (
-                  <p className="text-muted-foreground text-center py-8">No applications yet</p>
+                  <div className="text-center py-12">
+                    <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                    <p className="text-muted-foreground">No applications yet</p>
+                    <p className="text-sm text-muted-foreground mt-1">Applications will appear here once users submit them</p>
+                  </div>
                 ) : (
                   <div className="overflow-x-auto">
                     <Table>
@@ -357,7 +393,11 @@ const CreatorDashboard = () => {
               </CardHeader>
               <CardContent>
                 {profiles.length === 0 ? (
-                  <p className="text-muted-foreground text-center py-8">No users registered yet</p>
+                  <div className="text-center py-12">
+                    <Users className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                    <p className="text-muted-foreground">No users registered yet</p>
+                    <p className="text-sm text-muted-foreground mt-1">Users will appear here once they sign up</p>
+                  </div>
                 ) : (
                   <div className="overflow-x-auto">
                     <Table>

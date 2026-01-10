@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logoImage from "@/assets/geteducate-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,8 +29,12 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">G</span>
+            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center overflow-hidden">
+              <img 
+                src={logoImage} 
+                alt="GetEducate Logo" 
+                className="w-8 h-8 object-contain"
+              />
             </div>
             <span className="font-display font-bold text-xl text-foreground">
               Get<span className="text-primary">Educate</span>
