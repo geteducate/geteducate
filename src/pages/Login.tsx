@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, ArrowLeft } from "lucide-react";
+import logoImage from "@/assets/geteducate-logo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -68,8 +69,12 @@ const Login = () => {
         <div className="p-8 rounded-2xl bg-card border border-border shadow-card animate-fade-in">
           {/* Logo */}
           <div className="flex items-center gap-2 mb-8">
-            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">G</span>
+            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center overflow-hidden">
+              <img 
+                src={logoImage} 
+                alt="GetEducate Logo" 
+                className="w-8 h-8 object-contain"
+              />
             </div>
             <span className="font-display font-bold text-xl">
               Get<span className="text-primary">Educate</span>
