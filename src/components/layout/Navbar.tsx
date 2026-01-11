@@ -29,17 +29,18 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary via-secondary to-accent p-0.5 shadow-lg shadow-primary/30 group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-105">
-              <div className="w-full h-full rounded-[14px] bg-background flex items-center justify-center overflow-hidden">
+            <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-400 p-[2px] shadow-lg shadow-orange-500/40 group-hover:shadow-orange-500/60 transition-all duration-300 group-hover:scale-105">
+              <div className="w-full h-full rounded-[14px] bg-card flex items-center justify-center overflow-hidden">
                 <img 
                   src={logoImage} 
                   alt="GetEducate Logo" 
-                  className="w-9 h-9 object-contain"
+                  className="w-9 h-9 object-contain drop-shadow-md"
                 />
               </div>
+              <div className="absolute -inset-1 bg-gradient-to-br from-orange-500/20 via-amber-500/20 to-yellow-400/20 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
             </div>
             <span className="font-display font-bold text-2xl tracking-tight">
-              Get<span className="text-gradient">Educate</span>
+              Get<span className="bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-400 bg-clip-text text-transparent">Educate</span>
             </span>
           </Link>
 

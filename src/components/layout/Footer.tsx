@@ -8,17 +8,18 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary via-secondary to-accent p-0.5 shadow-md shadow-primary/20 group-hover:shadow-primary/40 transition-all duration-300 group-hover:scale-105">
-              <div className="w-full h-full rounded-[12px] bg-background flex items-center justify-center overflow-hidden">
+            <div className="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-400 p-[2px] shadow-md shadow-orange-500/30 group-hover:shadow-orange-500/50 transition-all duration-300 group-hover:scale-105">
+              <div className="w-full h-full rounded-[12px] bg-card flex items-center justify-center overflow-hidden">
                 <img 
                   src={logoImage} 
                   alt="GetEducate Logo" 
-                  className="w-8 h-8 object-contain"
+                  className="w-8 h-8 object-contain drop-shadow-md"
                 />
               </div>
+              <div className="absolute -inset-1 bg-gradient-to-br from-orange-500/20 via-amber-500/20 to-yellow-400/20 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
             </div>
             <span className="font-display font-bold text-xl tracking-tight">
-              Get<span className="text-gradient">Educate</span>
+              Get<span className="bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-400 bg-clip-text text-transparent">Educate</span>
             </span>
           </Link>
 

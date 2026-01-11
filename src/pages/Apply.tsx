@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ApplicationForm from "@/components/apply/ApplicationForm";
+import JobDetailModal from "@/components/apply/JobDetailModal";
 
 // Job role images
 import customerSupportImg from "@/assets/roles/customer-support.jpg";
@@ -44,6 +45,8 @@ const Apply = () => {
   const navigate = useNavigate();
   const [jobs, setJobs] = useState<JobCategory[]>([]);
   const [selectedJob, setSelectedJob] = useState<JobCategory | null>(null);
+  const [detailJob, setDetailJob] = useState<JobCategory | null>(null);
+  const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -61,6 +64,16 @@ const Apply = () => {
 
     fetchJobs();
   }, []);
+
+  const handleJobClick = (job: JobCategory) => {
+    setDetailJob(job);
+    setShowModal(true);
+  };
+
+  const handleApplyFromModal = () => {
+    setShowModal(false);
+    setSelectedJob(detailJob);
+  };
 
   if (selectedJob) {
     return (
@@ -114,7 +127,7 @@ const Apply = () => {
                 return (
                   <button
                     key={job.id}
-                    onClick={() => setSelectedJob(job)}
+                    onClick={() => handleJobClick(job)}
                     className="group rounded-2xl bg-card border border-border hover:border-primary/50 hover:shadow-glow transition-all duration-300 text-left animate-fade-in overflow-hidden"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
@@ -150,6 +163,15 @@ const Apply = () => {
           )}
         </div>
       </div>
+
+      {/* Job Detail Modal */}
+      <JobDetailModal 
+        job={detailJob}
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onApply={handleApplyFromModal}
+      />
+
       <Footer />
     </div>
   );
