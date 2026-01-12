@@ -16,33 +16,84 @@ const Creators = () => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    // Check if user is already logged in via session storage
-    const isAuthenticated = sessionStorage.getItem("creator_authenticated");
-    if (isAuthenticated === "true") {
-      navigate("/creators/dashboard", { replace: true });
-      return;
-    }
-    setCheckingAuth(false);
+    // Check if user is already logged in and has creator role
+    const checkExistingSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session?.user) {
+        const { data: hasCreator } = await supabase.rpc("has_role", {
+          _user_id: session.user.id,
+          _role: "creator",
+        });
+        const { data: hasAdmin } = await supabase.rpc("has_role", {
+          _user_id: session.user.id,
+          _role: "admin",
+        });
+
+        if (hasCreator || hasAdmin) {
+          navigate("/creators/dashboard", { replace: true });
+          return;
+        }
+      }
+
+      setCheckingAuth(false);
+    };
+
+    checkExistingSession();
   }, [navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Validate credentials
-    const validLogin = "Geteducatepro1";
-    const validPassword = "@Geteducate08";
+    try {
+      const email = login.trim();
 
-    if (login === validLogin && password === validPassword) {
-      // Store authentication in session
-      sessionStorage.setItem("creator_authenticated", "true");
+      // NOTE: We keep the label as "Login", but authentication requires an email.
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        toast({
+          title: "Access Denied",
+          description: error.message,
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      const { data: hasCreator } = await supabase.rpc("has_role", {
+        _user_id: data.user.id,
+        _role: "creator",
+      });
+      const { data: hasAdmin } = await supabase.rpc("has_role", {
+        _user_id: data.user.id,
+        _role: "admin",
+      });
+
+      if (!hasCreator && !hasAdmin) {
+        await supabase.auth.signOut();
+        toast({
+          title: "Access Denied",
+          description: "You don't have permission to access the Creator Dashboard.",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
       toast({ title: "Welcome!", description: "You've logged in to the Creator Dashboard." });
       navigate("/creators/dashboard", { replace: true });
-    } else {
-      toast({ 
-        title: "Access Denied", 
-        description: "Invalid login or password. Please try again.", 
-        variant: "destructive" 
+    } catch {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred.",
+        variant: "destructive",
       });
     }
 
@@ -60,9 +111,9 @@ const Creators = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       {/* Background */}
-      <div className="absolute inset-0 gradient-ocean opacity-50" />
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
+      <div className="absolute inset-0 gradient-ocean opacity-100" />
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
 
       <div className="w-full max-w-md relative z-10">
         <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 font-medium">
@@ -76,10 +127,10 @@ const Creators = () => {
             <div className="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center">
               <Lock className="w-6 h-6 text-white" />
             </div>
-            <div className="w-10 h-10 rounded-lg bg-white/10 backdrop-blur flex items-center justify-center overflow-hidden p-1">
-              <img 
-                src={logoImage} 
-                alt="GetEducate Logo" 
+            <div className="w-10 h-10 rounded-lg bg-background/40 ring-1 ring-primary/30 shadow-glow backdrop-blur flex items-center justify-center overflow-hidden p-1.5">
+              <img
+                src={logoImage}
+                alt="GetEducate Logo"
                 className="w-full h-full object-contain"
               />
             </div>
