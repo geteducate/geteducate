@@ -16,83 +16,34 @@ const Creators = () => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    // Check if user is already logged in and has creator role
-    const checkExistingSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+    // Check if user is already authenticated via sessionStorage
+    const isAuthenticated = sessionStorage.getItem("creatorAuthenticated") === "true";
+    
+    if (isAuthenticated) {
+      navigate("/creators/dashboard", { replace: true });
+      return;
+    }
 
-      if (session?.user) {
-        const { data: hasCreator } = await supabase.rpc("has_role", {
-          _user_id: session.user.id,
-          _role: "creator",
-        });
-        const { data: hasAdmin } = await supabase.rpc("has_role", {
-          _user_id: session.user.id,
-          _role: "admin",
-        });
-
-        if (hasCreator || hasAdmin) {
-          navigate("/creators/dashboard", { replace: true });
-          return;
-        }
-      }
-
-      setCheckingAuth(false);
-    };
-
-    checkExistingSession();
+    setCheckingAuth(false);
   }, [navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    try {
-      const email = login.trim();
+    // Hardcoded creator credentials
+    const VALID_LOGIN = "Geteducatepro1";
+    const VALID_PASSWORD = "@educate08";
 
-      // NOTE: We keep the label as "Login", but authentication requires an email.
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) {
-        toast({
-          title: "Access Denied",
-          description: error.message,
-          variant: "destructive",
-        });
-        setIsLoading(false);
-        return;
-      }
-
-      const { data: hasCreator } = await supabase.rpc("has_role", {
-        _user_id: data.user.id,
-        _role: "creator",
-      });
-      const { data: hasAdmin } = await supabase.rpc("has_role", {
-        _user_id: data.user.id,
-        _role: "admin",
-      });
-
-      if (!hasCreator && !hasAdmin) {
-        await supabase.auth.signOut();
-        toast({
-          title: "Access Denied",
-          description: "You don't have permission to access the Creator Dashboard.",
-          variant: "destructive",
-        });
-        setIsLoading(false);
-        return;
-      }
-
+    if (login.trim() === VALID_LOGIN && password === VALID_PASSWORD) {
+      // Store auth state in sessionStorage for dashboard access
+      sessionStorage.setItem("creatorAuthenticated", "true");
       toast({ title: "Welcome!", description: "You've logged in to the Creator Dashboard." });
       navigate("/creators/dashboard", { replace: true });
-    } catch {
+    } else {
       toast({
-        title: "Error",
-        description: "An unexpected error occurred.",
+        title: "Access Denied",
+        description: "Invalid login or password.",
         variant: "destructive",
       });
     }
