@@ -35,7 +35,7 @@ const Creators = () => {
     const VALID_LOGIN = "Geteducatepro1";
     const VALID_PASSWORD = "@educate08";
 
-    if (login.trim() === VALID_LOGIN && password === VALID_PASSWORD) {
+    if (login.trim() === VALID_LOGIN && password.trim() === VALID_PASSWORD) {
       // Store auth state in sessionStorage for dashboard access
       sessionStorage.setItem("creatorAuthenticated", "true");
       toast({ title: "Welcome!", description: "You've logged in to the Creator Dashboard." });
