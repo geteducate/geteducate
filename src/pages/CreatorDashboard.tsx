@@ -53,39 +53,21 @@ const CreatorDashboard = () => {
   const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
 
   useEffect(() => {
-    // Check authentication and role
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session?.user) {
-        navigate("/creators", { replace: true });
-        return;
-      }
+    // Check if user is authenticated via sessionStorage (creators login page)
+    const isAuthenticated = sessionStorage.getItem("creatorAuthenticated") === "true";
 
-      // Check if user has creator or admin role
-      const { data: hasCreator } = await supabase.rpc("has_role", {
-        _user_id: session.user.id,
-        _role: "creator",
-      });
-      const { data: hasAdmin } = await supabase.rpc("has_role", {
-        _user_id: session.user.id,
-        _role: "admin",
-      });
+    if (!isAuthenticated) {
+      navigate("/creators", { replace: true });
+      return;
+    }
 
-      if (!hasCreator && !hasAdmin) {
-        navigate("/creators", { replace: true });
-        return;
-      }
-
-      fetchData();
-    };
-
-    checkAuth();
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   const fetchData = async () => {
     setLoading(true);
-    
+
     // Fetch applications with job category info
     const { data: appsData, error: appsError } = await supabase
       .from("applications")
@@ -110,12 +92,12 @@ const CreatorDashboard = () => {
     if (appsData) setApplications(appsData);
     if (profilesData) setProfiles(profilesData);
     if (jobsData) setJobCategories(jobsData);
-    
+
     setLoading(false);
   };
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
+  const handleLogout = () => {
+    sessionStorage.removeItem("creatorAuthenticated");
     navigate("/creators");
   };
 
