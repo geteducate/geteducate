@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import logoImage from "@/assets/geteducate-logo.png";
+import GELogo from "./GELogo";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -71,13 +71,9 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 via-yellow-400 to-orange-500 p-[2px] shadow-lg shadow-amber-500/40 group-hover:shadow-amber-500/60 transition-all duration-300 group-hover:scale-105">
-              <div className="w-full h-full rounded-[14px] bg-gradient-to-br from-amber-500/20 to-yellow-500/20 flex items-center justify-center overflow-hidden backdrop-blur-sm">
-                <img 
-                  src={logoImage} 
-                  alt="GetEducate Logo" 
-                  className="w-9 h-9 object-contain drop-shadow-md brightness-0 invert sepia saturate-[10] hue-rotate-[15deg]"
-                />
+            <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400/10 via-yellow-400/10 to-orange-500/10 p-[2px] shadow-lg shadow-amber-500/40 group-hover:shadow-amber-500/60 transition-all duration-300 group-hover:scale-105 border border-amber-500/30">
+              <div className="w-full h-full rounded-[14px] flex items-center justify-center overflow-hidden">
+                <GELogo className="w-10 h-10 drop-shadow-md" />
               </div>
               <div className="absolute -inset-1 bg-gradient-to-br from-amber-500/30 via-yellow-500/30 to-orange-500/30 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
             </div>
