@@ -1,7 +1,7 @@
 import { Target, Users, Rocket, Shield, Heart, Zap, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const missionItems = [
   {
@@ -56,11 +56,40 @@ const missionItems = [
 
 const MissionSection = () => {
   const navigate = useNavigate();
-  const [hoveredRow, setHoveredRow] = useState<"top" | "bottom" | null>(null);
+  const [topRowState, setTopRowState] = useState<"running" | "pausing" | "paused">("running");
+  const [bottomRowState, setBottomRowState] = useState<"running" | "pausing" | "paused">("running");
+  const topTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const bottomTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Split items into two rows
   const topRow = missionItems.slice(0, 3);
   const bottomRow = missionItems.slice(3, 6);
+
+  const handleTopRowEnter = () => {
+    if (topTimeoutRef.current) clearTimeout(topTimeoutRef.current);
+    setTopRowState("pausing");
+    topTimeoutRef.current = setTimeout(() => {
+      setTopRowState("paused");
+    }, 800);
+  };
+
+  const handleTopRowLeave = () => {
+    if (topTimeoutRef.current) clearTimeout(topTimeoutRef.current);
+    setTopRowState("running");
+  };
+
+  const handleBottomRowEnter = () => {
+    if (bottomTimeoutRef.current) clearTimeout(bottomTimeoutRef.current);
+    setBottomRowState("pausing");
+    bottomTimeoutRef.current = setTimeout(() => {
+      setBottomRowState("paused");
+    }, 800);
+  };
+
+  const handleBottomRowLeave = () => {
+    if (bottomTimeoutRef.current) clearTimeout(bottomTimeoutRef.current);
+    setBottomRowState("running");
+  };
 
   return (
     <section id="mission" className="py-24 relative overflow-hidden">
@@ -86,15 +115,12 @@ const MissionSection = () => {
           {/* Top Row - moves right */}
           <div 
             className="relative overflow-hidden"
-            onMouseEnter={() => setHoveredRow("top")}
-            onMouseLeave={() => setHoveredRow(null)}
+            onMouseEnter={handleTopRowEnter}
+            onMouseLeave={handleTopRowLeave}
           >
             <div 
-              className={`flex gap-6 ${hoveredRow === "top" ? "animate-none" : "animate-scroll-right"}`}
-              style={{ 
-                animationPlayState: hoveredRow === "top" ? "paused" : "running",
-                width: "fit-content" 
-              }}
+              className={`flex gap-6 animate-scroll-right ${topRowState === "pausing" ? "pausing" : ""} ${topRowState === "paused" ? "paused" : ""}`}
+              style={{ width: "fit-content" }}
             >
               {/* Duplicate for seamless loop */}
               {[...topRow, ...topRow, ...topRow].map((item, index) => (
@@ -119,15 +145,12 @@ const MissionSection = () => {
           {/* Bottom Row - moves left */}
           <div 
             className="relative overflow-hidden"
-            onMouseEnter={() => setHoveredRow("bottom")}
-            onMouseLeave={() => setHoveredRow(null)}
+            onMouseEnter={handleBottomRowEnter}
+            onMouseLeave={handleBottomRowLeave}
           >
             <div 
-              className={`flex gap-6 ${hoveredRow === "bottom" ? "animate-none" : "animate-scroll-left"}`}
-              style={{ 
-                animationPlayState: hoveredRow === "bottom" ? "paused" : "running",
-                width: "fit-content" 
-              }}
+              className={`flex gap-6 animate-scroll-left ${bottomRowState === "pausing" ? "pausing" : ""} ${bottomRowState === "paused" ? "paused" : ""}`}
+              style={{ width: "fit-content" }}
             >
               {/* Duplicate for seamless loop */}
               {[...bottomRow, ...bottomRow, ...bottomRow].map((item, index) => (
