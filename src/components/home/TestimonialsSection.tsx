@@ -1,4 +1,5 @@
 import { Star, Briefcase, DollarSign, TrendingUp } from "lucide-react";
+import { useState, useRef } from "react";
 
 const testimonials = [
   {
@@ -64,6 +65,25 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
+  const [animationState, setAnimationState] = useState<'running' | 'pausing' | 'paused'>('running');
+  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current);
+    }
+    setAnimationState('pausing');
+    pauseTimeoutRef.current = setTimeout(() => {
+      setAnimationState('paused');
+    }, 800);
+  };
+
+  const handleMouseLeave = () => {
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current);
+    }
+    setAnimationState('running');
+  };
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-4">
@@ -84,11 +104,19 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className="group p-6 rounded-2xl bg-gradient-to-br from-card/80 to-card border border-border hover:border-emerald-500/30 transition-all duration-300 animate-fade-in hover:shadow-lg hover:shadow-emerald-500/10"
+              className={`group p-6 rounded-2xl bg-gradient-to-br from-card/80 to-card border border-border hover:border-emerald-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10 ${
+                animationState === 'running' ? 'animate-fade-in' : 
+                animationState === 'pausing' ? 'animate-fade-in animation-pausing' : 
+                'animate-fade-in animation-paused'
+              }`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Rating Stars */}
