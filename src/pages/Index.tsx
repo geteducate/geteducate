@@ -3,6 +3,7 @@ import HeroSection from "@/components/home/HeroSection";
 import QuoteSection from "@/components/home/QuoteSection";
 import MissionSection from "@/components/home/MissionSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
+import FAQSection from "@/components/home/FAQSection";
 import ContactSection from "@/components/home/ContactSection";
 import Footer from "@/components/layout/Footer";
 import MouseGlow from "@/components/effects/MouseGlow";
@@ -16,6 +17,7 @@ const Index = () => {
       <QuoteSection />
       <MissionSection />
       <TestimonialsSection />
+      <FAQSection />
       <ContactSection />
       <Footer />
     </div>
