@@ -53,12 +53,17 @@ const faqs = [
 ];
 
 const FAQSection = () => {
+  // Split FAQs into two columns
+  const midpoint = Math.ceil(faqs.length / 2);
+  const leftColumnFaqs = faqs.slice(0, midpoint);
+  const rightColumnFaqs = faqs.slice(midpoint);
+
   return (
-    <section className="py-20 px-4 bg-background">
-      <div className="max-w-3xl mx-auto">
+    <section className="py-16 px-4 bg-background">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
             Frequently Asked Questions
           </h2>
           <p className="text-muted-foreground text-lg">
@@ -66,27 +71,48 @@ const FAQSection = () => {
           </p>
         </div>
 
-        {/* FAQ Accordion */}
-        <Accordion type="single" collapsible className="space-y-3">
-          {faqs.map((faq, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="bg-card border border-border rounded-xl px-6 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-200 data-[state=open]:shadow-md data-[state=open]:border-primary/40"
-            >
-              <AccordionTrigger className="text-left text-foreground font-medium py-5 hover:no-underline [&[data-state=open]>svg]:rotate-180">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        {/* FAQ Accordion - 2 Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+          {/* Left Column */}
+          <Accordion type="single" collapsible className="space-y-2">
+            {leftColumnFaqs.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                value={`left-${index}`}
+                className="bg-card border border-border rounded-lg px-4 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-200 data-[state=open]:shadow-md data-[state=open]:border-primary/40"
+              >
+                <AccordionTrigger className="text-left text-foreground font-medium py-4 text-sm hover:no-underline [&[data-state=open]>svg]:rotate-180">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-4 text-sm leading-relaxed">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+
+          {/* Right Column */}
+          <Accordion type="single" collapsible className="space-y-2">
+            {rightColumnFaqs.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                value={`right-${index}`}
+                className="bg-card border border-border rounded-lg px-4 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-200 data-[state=open]:shadow-md data-[state=open]:border-primary/40"
+              >
+                <AccordionTrigger className="text-left text-foreground font-medium py-4 text-sm hover:no-underline [&[data-state=open]>svg]:rotate-180">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-4 text-sm leading-relaxed">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
 
         {/* Additional Help */}
-        <div className="text-center mt-12 p-6 bg-muted/50 rounded-xl border border-border">
-          <p className="text-muted-foreground">
+        <div className="text-center mt-10 p-5 bg-muted/50 rounded-xl border border-border">
+          <p className="text-muted-foreground text-sm">
             Still have questions?{" "}
             <a
               href="#contact"
