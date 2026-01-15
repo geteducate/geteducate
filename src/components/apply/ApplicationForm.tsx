@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -287,6 +287,19 @@ const ApplicationForm = ({ job, onBack }: ApplicationFormProps) => {
               />
             </div>
           </div>
+
+          {/* Privacy Notice */}
+          <p className="text-sm text-muted-foreground text-center">
+            By submitting this application, you agree to our{" "}
+            <Link to="/privacy" className="text-primary hover:underline">
+              Privacy Policy
+            </Link>{" "}
+            and{" "}
+            <Link to="/terms" className="text-primary hover:underline">
+              Terms & Conditions
+            </Link>
+            .
+          </p>
 
           <Button 
             type="submit" 
