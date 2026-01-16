@@ -18,6 +18,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Our Mission", href: "#mission" },
+    { name: "Updates", href: "/updates", isRoute: true },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -47,7 +48,12 @@ const Navbar = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const scrollToSection = (href: string) => {
+  const scrollToSection = (href: string, isRoute?: boolean) => {
+    if (isRoute) {
+      navigate(href);
+      setIsOpen(false);
+      return;
+    }
     if (href.startsWith("#")) {
       const element = document.querySelector(href);
       if (element) {
@@ -87,7 +93,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <button
                 key={link.name}
-                onClick={() => scrollToSection(link.href)}
+                onClick={() => scrollToSection(link.href, (link as any).isRoute)}
                 className="text-muted-foreground hover:text-foreground transition-colors font-medium"
               >
                 {link.name}
@@ -148,7 +154,7 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <button
                   key={link.name}
-                  onClick={() => scrollToSection(link.href)}
+                  onClick={() => scrollToSection(link.href, (link as any).isRoute)}
                   className="text-muted-foreground hover:text-foreground transition-colors font-medium text-left"
                 >
                   {link.name}
