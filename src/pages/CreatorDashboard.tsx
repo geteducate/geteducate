@@ -9,10 +9,11 @@ import { Badge } from "@/components/ui/badge";
 import { 
   Users, FileText, TrendingUp, BarChart3, 
   LogOut, RefreshCw, Eye, Loader2, X, Mail, Phone, Calendar, Link as LinkIcon,
-  Home, Settings, Bell
+  Home, Settings, Bell, Megaphone
 } from "lucide-react";
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend } from "recharts";
 import logoImage from "@/assets/geteducate-logo.png";
+import { UpdatesManagement } from "@/components/dashboard/UpdatesManagement";
 
 interface Application {
   id: string;
@@ -145,6 +146,13 @@ const CreatorDashboard = () => {
               <button className="flex items-center gap-2 text-sm font-medium hover:text-white/80 transition-colors">
                 <Home className="w-4 h-4" />
                 Dashboard
+              </button>
+              <button 
+                onClick={() => document.getElementById('updates-tab')?.click()}
+                className="flex items-center gap-2 text-sm font-medium text-primary-foreground/70 hover:text-white transition-colors"
+              >
+                <Megaphone className="w-4 h-4" />
+                Updates
               </button>
               <button className="flex items-center gap-2 text-sm font-medium text-primary-foreground/70 hover:text-white transition-colors">
                 <Settings className="w-4 h-4" />
@@ -356,6 +364,10 @@ const CreatorDashboard = () => {
             <TabsTrigger value="users" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
               Users ({profiles.length})
             </TabsTrigger>
+            <TabsTrigger id="updates-tab" value="updates" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground gap-2">
+              <Megaphone className="w-4 h-4" />
+              Updates
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="applications">
@@ -475,6 +487,10 @@ const CreatorDashboard = () => {
                 )}
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="updates">
+            <UpdatesManagement />
           </TabsContent>
         </Tabs>
       </main>
