@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { ThumbsUp, ThumbsDown, MessageCircle, Eye, Edit, Trash2, ChevronDown, ChevronUp, Send } from "lucide-react";
+import { ThumbsUp, ThumbsDown, MessageCircle, Eye, Edit, Trash2, ChevronDown, ChevronUp, Send, Share2, Link2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
@@ -344,6 +350,47 @@ export const PostCard = ({ post, images, isAdmin, onEdit, onDelete }: PostCardPr
           <span>{commentCount}</span>
           {showComments ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </Button>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="gap-2 text-muted-foreground ml-auto"
+            >
+              <Share2 className="h-4 w-4" />
+              <span>Share</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem
+              onClick={() => {
+                const postUrl = `${window.location.origin}/updates?post=${post.id}`;
+                const text = post.content.slice(0, 200) + (post.content.length > 200 ? '...' : '');
+                const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(postUrl)}`;
+                window.open(twitterUrl, '_blank', 'width=550,height=420');
+              }}
+              className="cursor-pointer"
+            >
+              <ExternalLink className="h-4 w-4 mr-2" />
+              Share on X
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                const postUrl = `${window.location.origin}/updates?post=${post.id}`;
+                navigator.clipboard.writeText(postUrl);
+                toast({
+                  title: "Link copied",
+                  description: "Post link has been copied to clipboard.",
+                });
+              }}
+              className="cursor-pointer"
+            >
+              <Link2 className="h-4 w-4 mr-2" />
+              Copy link
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {/* Comments Section */}
